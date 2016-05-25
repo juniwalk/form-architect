@@ -1,0 +1,37 @@
+{
+	"name": "juniwalk/form-architect",
+	"description": "Nette Framework component that lets you dynamically design forms.",
+	"type": "library",
+	"keywords": ["form","architect","builder","forms","nette","nettefw"],
+	"license": "MIT",
+
+	"authors": [{
+		"name": "Martin Procházka",
+		"email": "juniwalk@outlook.cz",
+		"role": "Developer"
+	}],
+
+	"support": {
+		"issues": "https://github.com/juniwalk/form-architect/issues"
+	},
+
+	"autoload": {
+		"psr-4": {"JuniWalk\\FormArchitect\\": "src/"}
+	},
+
+	"require": {
+		"php": ">=5.5",
+		"nette/application": "^2.0",
+		"nette/forms": "^2.0",
+		"nette/di": "^2.0"
+	},
+
+	"autoload-dev": {
+		"psr-4": {"JuniWalk\\FormArchitect\\Tests\\": "tests/"}
+	},
+
+	"require-dev": {
+		"nette/tester": "^1.0",
+		"latte/latte": "^2.0"
+	}
+}

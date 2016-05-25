@@ -1,0 +1,121 @@
+<section class="fr-section" n:snippet="section">
+{if isset($section)}
+
+	{form form class => 'panel '.$panelStyle.' ajax form-horizontal'}
+
+		{formContainer $section->getName()}
+		{foreach $section->getFields() as $field}
+
+			{include #'input-'.$field->getClass()
+				field => $field,
+				form => $formContainer
+			}
+
+		{/foreach}
+		{/formContainer}
+
+		<div class="panel-body fr-field">
+		<div class="col-sm-offset-3 col-sm-9">
+
+			<button n:name="_back" class="btn btn-default pull-right" type="submit" n:if="!$control->isFirstStep() && $control->hasSteps()">
+				<i class="fa fa-chevron-circle-left"></i>
+				{_'form-architect.renderer.steps-back'}
+			</button>
+
+			<button n:name="_forward" class="btn btn-primary" type="submit" n:if="!$control->isLastStep() && $control->hasSteps()">
+				{_'form-architect.renderer.steps-next'}
+				<i class="fa fa-chevron-circle-right"></i>
+			</button>
+
+			<button n:name="_submit" class="btn btn-primary" type="submit" n:if="$control->isLastStep() || !$control->hasSteps()">
+				<i class="fa fa-send"></i>
+				{_'form-architect.renderer.steps-submit'}
+			</button>
+
+		</div>
+		</div>
+
+		<div class="panel-footer clearfix" n:ifcontent>{_$footerText}</div>
+
+		<div class="fd-overlay animate invisible">
+			<i class="fa fa-refresh fa-spin"></i>
+		</div>
+
+	{/form}
+
+{/if}
+</section>
+
+{define input-title}
+
+	<div class="panel-heading" n:if="$control->hasSectionTitle() && $title = $field->getValue('content')">
+		<div class="panel-title">{$title}</div>
+	</div>
+
+{/define}
+
+{define input-question}
+
+	<div class="panel-body fr-field">
+
+		<label n:name="$field->getName()" n:class="$field->getValue('isRequired') ? required, col-sm-3, control-label">{$field->getValue('title')}</label>
+		<div class="col-sm-9">
+			{include #'question-'.$field->getValue('type')
+				field => $field,
+				form => $form,
+				description => $field->getValue('description')
+			}
+		</div>
+
+	</div>
+
+	{define question-text}
+		<input type="text" class="form-control" n:name="$field->getName()">
+		<p class="help-block" n:if="$description">{$description}</p>
+	{/define}
+
+	{define question-textarea}
+		<textarea class="form-control" n:name="$field->getName()"></textarea>
+		<p class="help-block" n:if="$description">{$description}</p>
+	{/define}
+
+	{define question-select}
+		<select type="text" class="form-control" n:name="$field->getName()"></select>
+		<p class="help-block" n:if="$description">{$description}</p>
+	{/define}
+
+	{define question-checkbox}
+	{foreach $form[$field->getName()]->getItems() as $key => $label}
+
+		<div n:class="$field->getValue('inline') ? checkbox-inline : checkbox">
+			<label n:name="$field->getName():$key">
+				<input n:name="$field->getName():$key" type="checkbox">
+				{$label}
+			</label>
+		</div>
+
+	{/foreach}
+	{/define}
+
+	{define question-radio}
+	{foreach $form[$field->getName()]->getItems() as $key => $label}
+
+		<div n:class="$field->getValue('inline') ? radio-inline : radio">
+			<label n:name="$field->getName():$key">
+				<input n:name="$field->getName():$key" type="radio">
+				{$label}
+			</label>
+		</div>
+
+	{/foreach}
+	{/define}
+
+{/define}
+
+{define input-description}
+
+	<div class="panel-body" n:if="$description = $field->getValue('content')">
+		{$description|noescape}
+	</div>
+
+{/define}

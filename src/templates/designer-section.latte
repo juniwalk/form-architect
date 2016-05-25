@@ -1,0 +1,43 @@
+<article class="panel panel-default bg-purple fd-section">
+{formContainer $control->getForm()}
+
+	<div class="panel-heading">
+		<div class="panel-title">{_'form-architect.designer.section'}</div>
+		<div class="fd-toolbar">
+			<a n:href="clone!" class="fd-tool ajax">
+				<i class="fa fa-copy"></i>
+			</a>
+			<a n:href="merge!" class="fd-tool ajax" n:if="$control->isMergeAllowed()">
+				<i class="fa fa-compress"></i>
+			</a>
+			<a n:href="remove!" class="fd-tool ajax" n:if="$control->isDeleteAllowed()">
+				<i class="fa fa-trash-o"></i>
+			</a>
+		</div>
+	</div>
+
+{foreach $control->getFields() as $field}
+
+	{control $field}
+
+{/foreach}
+
+	<nav class="panel-footer">
+
+		<a n:href="addQuestion!" class="btn btn-default ajax">
+			<i class="fa fa-question"></i>
+			<span class="hidden-xs">{_'form-architect.designer.section-question'}</span>
+		</a>
+		<a n:href="addDescription!" class="btn btn-default ajax">
+			<i class="fa fa-font"></i>
+			<span class="hidden-xs">{_'form-architect.designer.section-description'}</span>
+		</a>
+
+	</nav>
+
+	<div class="fd-overlay animate invisible">
+		<i class="fa fa-refresh fa-spin"></i>
+	</div>
+
+{/formContainer}
+</article>

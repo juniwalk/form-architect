@@ -1,0 +1,139 @@
+<section class="fd-field panel-body no-padding animate">
+{formContainer $control->getForm()}
+
+	<div class="clearfix">
+
+		<div class="fd-toolbar vertical">
+			<a n:href="moveUp!" class="fd-tool ajax" n:tag-if="$control->hasUpwardMove()">
+				<span n:class="fd-tool, !$control->hasUpwardMove() ? text-muted"><i class="fa fa-fw fa-lg fa-chevron-up"></i></span>
+			</a>
+			<a n:href="moveDown!" class="fd-tool ajax" n:tag-if="$control->hasDownwardMove()">
+				<span n:class="fd-tool, !$control->hasDownwardMove() ? text-muted"><i class="fa fa-fw fa-lg fa-chevron-down"></i></span>
+			</a>
+		</div>
+
+		<div class="fd-content">
+
+			{include #'field-'.$control->getClass()}
+
+		</div>
+
+	</div>
+
+	<div class="well">
+	<div class="fd-toolbar animate" n:if="$control->hasToolbar()">
+
+		<a n:href="clone!" class="fd-tool ajax">
+			<i class="fa fa-copy"></i>
+		</a>
+
+		<a n:href="remove!" class="fd-tool ajax">
+			<i class="fa fa-trash-o"></i>
+		</a>
+
+		<div class="checkbox" style="display: inline-block; margin-left: 10px;" n:if="$control->getClass() == 'question'">
+			<label n:name="isRequired">
+				<input n:name="isRequired" type="checkbox" data-autosave>
+				{_'form-architect.designer.field-required'}
+			</label>
+		</div>
+
+	</div>
+	</div>
+
+{/formContainer}
+</section>
+
+{define field-title}
+
+	<div class="form-group">
+		<label n:name="content">{_'form-architect.designer.section-name'}</label>
+		<input n:name="content" type="text" class="form-control" data-autosave>
+	</div>
+
+{/define}
+
+{define field-question}
+
+	<div class="form-group">
+		<label n:name="title">{_'form-architect.designer.field-title'}</label>
+		<div class="input-group">
+			<input n:name="title" type="text" class="form-control" data-autosave>
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fa fa-fw {$control->getIcon()}"></i>
+					{_$control->getTitle()}
+				</button>
+				<ul class="dropdown-menu" n:inner-foreach="$control->getTypes() as $type => $title">
+					<li n:class="$control->getType() == $type ? active"><a n:href="type! $type" class="ajax" n:if="$title">
+						<i class="fa fa-fw {$control->getIconFor($type)}"></i>
+						{_$title}
+					</a></li>
+					<li role="separator" class="divider" n:if="!$title"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group" n:if="!$control->isChoiceControl() || $control->isSelect()">
+		<label n:name="description">{_'form-architect.designer.field-description'}</label>
+		<input n:name="description" type="text" class="form-control input-sm" data-autosave>
+	</div>
+
+	<div class="well well-sm no-margin" n:if="$control->isChoiceControl()">
+	<div class="fd-toolbar animate">
+
+		{formContainer options}
+
+			{foreach $formContainer->getComponents() as $option}
+			{formContainer $option}
+
+			<div class="form-group">
+			<div class="input-group input-group-sm">
+				<input n:name="option" type="text" class="form-control" placeholder="{_'form-architect.designer.field-option'}" data-autosave>
+				<span class="input-group-btn">
+					<a n:href="deleteOption! $option->getName()" class="btn btn-danger ajax">
+						<i class="fa fa-times"></i>
+						<span class="sr-only">{_'form-architect.designer.field-option-delete'}</span>
+					</a>
+				</span>
+			</div>
+			</div>
+
+			{/formContainer}
+			{/foreach}
+
+		{/formContainer}
+
+		<a n:href="addOption!" class="btn btn-default btn-sm ajax">
+			<i class="fa fa-plus"></i>
+			{_'form-architect.designer.field-option-add'}
+		</a>
+
+		<div class="checkbox" style="display: inline-block; margin-left: 10px;" n:if="$control->isSelect()">
+			<label n:name="multiple">
+				<input n:name="multiple" type="checkbox" data-autosave>
+				{_'form-architect.designer.field-option-multiple'}
+			</label>
+		</div>
+
+		<div class="checkbox" style="display: inline-block; margin-left: 10px;" n:if="!$control->isSelect()">
+			<label n:name="inline">
+				<input n:name="inline" type="checkbox" data-autosave>
+				{_'form-architect.designer.field-option-inline'}
+			</label>
+		</div>
+
+	</div>
+	</div>
+
+{/define}
+
+{define field-description}
+
+	<div class="form-group">
+		<label n:name="content">{_'form-architect.designer.field-description'}</label>
+		<textarea n:name="content" class="form-control fd-editor" data-autosave></textarea>
+	</div>
+
+{/define}

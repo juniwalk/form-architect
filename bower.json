@@ -1,0 +1,32 @@
+{
+  "name": "form-architect",
+  "homepage": "https://github.com/juniwalk/form-architect",
+  "authors": [
+    "Martin Procházka <juniwalk@outlook.cz>"
+  ],
+  "description": "Assets for component that lets you dynamically design forms.",
+  "main": [
+    "./dist/css/form-architect.css",
+    "./dist/js/form-architect.js"
+  ],
+  "keywords": [
+    "form",
+    "architect"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "src",
+    "composer.json",
+    "tests",
+    "node_modules",
+    "test"
+  ],
+  "dependencies": {
+    "jquery": "^2.0",
+    "nette-forms": "^2.0",
+    "nette.ajax.js": "^2.0",
+    "bootstrap": "^3.0"
+  }
+}

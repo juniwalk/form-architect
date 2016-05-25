@@ -1,0 +1,30 @@
+{form scheme class => 'ajax'}
+<nav class="fd-section well well-sm">
+
+	<button n:name="save" type="submit" class="btn btn-primary pull-right">
+		<i class="fa fa-save"></i>
+		{_'form-architect.designer.scheme-save'}
+	</button>
+
+	<a n:href="addSection!" class="btn btn-default ajax">
+		<i class="fa fa-file-o"></i>
+		{_'form-architect.designer.section-add'}
+	</a>
+
+	<a n:href="startOver!" class="btn btn-danger ajax">
+		<i class="fa fa-trash-o"></i>
+		{_'form-architect.designer.scheme-clear'}
+	</a>
+
+	<div class="fd-overlay animate invisible">
+		<i class="fa fa-refresh fa-spin"></i>
+	</div>
+
+</nav>
+
+<section n:snippet="sections" n:inner-foreach="$control->getSections() as $section">
+
+	{control $section}
+
+</section>
+{/form}
