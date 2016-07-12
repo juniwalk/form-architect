@@ -25,7 +25,8 @@ interface Section
 
 
 	/**
-	 * @param array  $scheme
+	 * @param  array  $scheme
+	 * @return NULL
 	 */
 	public function setScheme(array $scheme = []);
 

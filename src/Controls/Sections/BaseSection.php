@@ -60,6 +60,10 @@ abstract class BaseSection extends Control implements Section
 			$target = $section;
 		}
 
+		if (!isset($target)) {
+			return NULL;
+		}
+
 		foreach ($this->getFields() as $field) {
 			if ($field instanceof Title) {
 				continue;
@@ -90,7 +94,7 @@ abstract class BaseSection extends Control implements Section
 	public function addField($name = NULL, $class = NULL)
 	{
 		$architect = $this->getArchitect();
-		$name =  $name ?: $architect->createName('field');
+		$name = $name ?: $architect->createName('field');
 		$form = $this->getForm()->addContainer($name);
 
 		if (is_null($class)) {

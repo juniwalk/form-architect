@@ -12,6 +12,8 @@ namespace JuniWalk\FormArchitect;
 
 /**
  * @property Itranslator $translator
+ * @method void onSchemeChange()
+ * @method void onSchemeSave()
  */
 final class Designer extends BaseArchitect
 {

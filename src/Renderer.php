@@ -17,8 +17,8 @@ use Nette\Utils\Html;
 
 /**
  * @property Itranslator $translator
- * @method onFormSubmit
- * @method onFormStep
+ * @method void onFormSubmit(Form $form, array $data, Renderer $renderer)
+ * @method void onFormStep(Form $form, array $data, Renderer $renderer)
  */
 final class Renderer extends BaseArchitect
 {
@@ -41,9 +41,6 @@ final class Renderer extends BaseArchitect
 	private $footerText = NULL;
 
 	/** @var string[] */
-	private $scheme = [];
-
-	/** @var string[] */
 	private $steps = [];
 
 	/** @var callable[] */
@@ -55,14 +52,14 @@ final class Renderer extends BaseArchitect
 
 	public function handleNextStep()
 	{
-		$this->setStep($this->getStep() +1);
+		$this->setStep($this->getStep() + 1);
 		$this->redrawControl('section');
 	}
 
 
 	public function handlePrevStep()
 	{
-		$this->setStep($this->getStep() -1);
+		$this->setStep($this->getStep() - 1);
 		$this->redrawControl('section');
 	}
 
@@ -196,12 +193,12 @@ final class Renderer extends BaseArchitect
 	 */
 	public function getLastStep()
 	{
-		return sizeof($this->steps) -1;
+		return sizeof($this->steps) - 1;
 	}
 
 
 	/**
-	 * @return int
+	 * @return string[]
 	 */
 	public function getSteps()
 	{
@@ -312,7 +309,7 @@ final class Renderer extends BaseArchitect
 	{
 		$form = new Form($this, $name);
 		$form->setTranslator($this->translator);
-		$form->onSuccess[] = function ($form, $data) {
+		$form->onSuccess[] = function ($form) {
 			$values = array_diff_key($form->getHttpData(), [
 				'_do' => TRUE,
 				'_submit' => TRUE,
@@ -323,13 +320,13 @@ final class Renderer extends BaseArchitect
 			$this->onFormStep($form, $values, $this);
 
 			if ($form['_back']->isSubmittedBy()) {
-				return $this->setStep($this->getStep() -1);
+				return $this->setStep($this->getStep() - 1);
 			}
 
 			$values = $this->mergeValues($values);
 
 			if ($form['_forward']->isSubmittedBy()) {
-				return $this->setStep($this->getStep() +1);
+				return $this->setStep($this->getStep() + 1);
 			}
 
 			$this->clearCache();

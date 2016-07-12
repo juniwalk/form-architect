@@ -25,21 +25,22 @@ interface Field
 
 
 	/**
-	 * @param array  $scheme
+	 * @param  array  $scheme
+	 * @return NULL
 	 */
 	public function setScheme(array $scheme = []);
 
 
-    /**
-     * @return bool
-     */
-    public function hasToolbar();
+	/**
+	 * @return bool
+	 */
+	public function hasToolbar();
 
 
-    /**
-     * @return bool
-     */
-    public function isSortable();
+	/**
+	 * @return bool
+	 */
+	public function isSortable();
 
 
 	/**

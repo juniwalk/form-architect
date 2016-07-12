@@ -29,10 +29,10 @@ final class Move
 			return $holder;
 		}
 
-		$result = array_slice($holder, 0, $index -1, TRUE);
+		$result = array_slice($holder, 0, $index - 1, TRUE);
 		$result[] = $holder[$index];
-		$result[] = $holder[$index -1];
-		$result += array_slice($holder, $index +1, count($holder), TRUE);
+		$result[] = $holder[$index - 1];
+		$result += array_slice($holder, $index + 1, count($holder), TRUE);
 
 		return $result;
 	}
@@ -46,14 +46,14 @@ final class Move
 	 */
 	public static function down(array $holder, $index)
 	{
-		if (count($holder) -1 < $index) {
+		if (count($holder) - 1 < $index) {
 			return $holder;
 		}
 
 		$result = array_slice($holder, 0, $index, TRUE);
-		$result[] = $holder[$index +1];
+		$result[] = $holder[$index + 1];
 		$result[] = $holder[$index];
-		$result += array_slice($holder, $index +2, count($holder), TRUE);
+		$result += array_slice($holder, $index + 2, count($holder), TRUE);
 
 		return $result;
 	}

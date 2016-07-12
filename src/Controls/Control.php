@@ -21,7 +21,7 @@ abstract class Control extends \Nette\Application\UI\Control
 	/** @var ITranslator */
 	private $translator;
 
-	/** @var Nette\Forms\Container */
+	/** @var Container */
 	private $form;
 
 
@@ -87,7 +87,8 @@ abstract class Control extends \Nette\Application\UI\Control
 
 
 	/**
-	 * @param array  $scheme
+	 * @param  array  $scheme
+	 * @return NULL
 	 */
 	abstract public function setScheme(array $scheme = []);
 }

@@ -24,10 +24,10 @@ final class Title extends BaseField
 	/**
 	 * @return bool
 	 */
-    public function hasToolbar()
-    {
+	public function hasToolbar()
+	{
 		return FALSE;
-    }
+	}
 
 
 	protected function createSchemeField()

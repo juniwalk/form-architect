@@ -18,12 +18,13 @@ use Nette\Forms\Container;
 use Nette\Http\Session;
 
 /**
- * @method onSchemeChange
- * @method onSchemeSave
+ * @property Itranslator $translator
+ * @method void onSchemeChange()
+ * @method void onSchemeSave()
  */
 abstract class BaseArchitect extends Controls\Control implements Controls\Architect
 {
-	/** @var Nette\Http\SessionSection */
+	/** @var \Nette\Http\SessionSection */
 	private $cache;
 
 	/** @var string */
@@ -102,11 +103,14 @@ abstract class BaseArchitect extends Controls\Control implements Controls\Archit
 	}
 
 
+	/**
+	 * @return NULL
+	 */
 	abstract public function render();
 
 
 	/**
-	 * @return Nette\Http\SessionSection|NULL
+	 * @return \Nette\Http\SessionSection
 	 */
 	protected function getCache()
 	{
@@ -114,6 +118,9 @@ abstract class BaseArchitect extends Controls\Control implements Controls\Archit
 	}
 
 
+	/**
+	 * @return NULL
+	 */
 	abstract protected function startup();
 
 
@@ -139,7 +146,7 @@ abstract class BaseArchitect extends Controls\Control implements Controls\Archit
 	{
 		$form = new Form($this, $name);
 		$form->setTranslator($this->translator);
-		$form->onSuccess[] = function ($form, $data) {
+		$form->onSuccess[] = function () {
 			$this->onSchemeSave();
 		};
 

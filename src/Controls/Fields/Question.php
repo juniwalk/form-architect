@@ -22,7 +22,7 @@ final class Question extends BaseField implements InputProvider
 	private $types = [
 		'text' => 'form-architect.designer.field-type-text',
 		'textarea' => 'form-architect.designer.field-type-textarea',
-		NULL,	// Separator
+		NULL, // Separator
 		'radio' => 'form-architect.designer.field-type-radio',
 		'checkbox' => 'form-architect.designer.field-type-checkbox',
 		'select' => 'form-architect.designer.field-type-select',
@@ -178,21 +178,23 @@ final class Question extends BaseField implements InputProvider
 
 	/**
 	 * @param  Container  $form
-	 * @return Nette\Forms\IControl
+	 * @return \Nette\Forms\IControl|NULL
+	 * @throws Exception
 	 */
 	public function createInput(Container $form)
 	{
 		$name = $this->getName();
+		$input = NULL;
 		$items = [];
 
-		if ($options = $this->getValue('options')) {
+		if ($options = (array) $this->getValue('options')) {
 			foreach ($options as $key => $option) {
 				$items[$key] = $option['option'];
 			}
 		}
 
 		switch ($this->type) {
-			default: case 'text':
+			case 'text':
 				$input = $form->addText($name);
 				break;
 
@@ -218,9 +220,12 @@ final class Question extends BaseField implements InputProvider
 				}
 
 				break;
+
+			default:
+				throw new \Exception;
 		}
 
-		if ($this->getValue('isRequired')) {
+		if ($this->getValue('isRequired') && isset($input)) {
 			$input->setRequired(TRUE);
 		}
 
@@ -256,7 +261,9 @@ final class Question extends BaseField implements InputProvider
 			return NULL;
 		}
 
-		for ($i = 0; $i < sizeof($this->values['options']); $i++) {
+		$optionsCount = count($this->values['options']);
+
+		for ($i = 0; $i < $optionsCount; $i++) {
 			$option = $options->addContainer($i);
 			$option->addText('option');
 		}

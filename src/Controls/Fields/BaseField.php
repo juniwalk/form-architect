@@ -119,7 +119,7 @@ abstract class BaseField extends Control implements Field
 
 	/**
 	 * @param  string  $key
-	 * @return mixed
+	 * @return string|NULL
 	 */
 	public function getValue($key)
 	{
@@ -170,10 +170,10 @@ abstract class BaseField extends Control implements Field
 	/**
 	 * @return bool
 	 */
-    public function hasToolbar()
-    {
+	public function hasToolbar()
+	{
 		return TRUE;
-    }
+	}
 
 
 	/**
@@ -240,5 +240,8 @@ abstract class BaseField extends Control implements Field
 	}
 
 
+	/**
+	 * @return NULL
+	 */
 	abstract protected function createSchemeField();
 }
