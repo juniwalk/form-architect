@@ -18,8 +18,8 @@ final class Designer extends BaseArchitect
 	public function handleAddSection()
 	{
 		$title = $this->addSection()->addTitle();
-		$title->setScheme([]);
 
+		$title->setScheme();
 		$this->onSchemeChange();
 	}
 
@@ -86,6 +86,7 @@ final class Designer extends BaseArchitect
 			if (!$this->isControlInvalid()) {
 				$this->redrawControl('empty');
 			}
+
 			$this->schemeSave();
 		};
 	}
