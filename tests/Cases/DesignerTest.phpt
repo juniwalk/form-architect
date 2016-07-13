@@ -63,6 +63,32 @@ final class DesignerTest extends \Tester\TestCase
 		Assert::type('array', $scheme);
 		Assert::same($this->scheme, $scheme);
 	}
+
+
+	public function testAddSection()
+	{
+		$designer = $this->getDesigner();
+		$designer->setScheme($this->scheme);
+		$designer->handleAddSection();
+
+		$scheme = $designer->getScheme();
+
+		Assert::type('array', $scheme);
+		Assert::count(2, $scheme);
+	}
+
+
+	public function testStartOver()
+	{
+		$designer = $this->getDesigner();
+		$designer->setScheme($this->scheme);
+		$designer->handleStartOver();
+
+		$scheme = $designer->getScheme();
+
+		Assert::type('array', $scheme);
+		Assert::count(0, $scheme);
+	}
 }
 
 (new DesignerTest)->run();
