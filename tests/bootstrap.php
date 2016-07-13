@@ -21,7 +21,8 @@ date_default_timezone_set('Europe/Prague');
 $_ENV = array_intersect_key($_ENV, ['TRAVIS' => TRUE]);
 $_SERVER['REQUEST_TIME'] = 1234567890;
 $_SERVER['REQUEST_ID'] = getmypid();
-$_GET = $_POST = [];
+$_SERVER['REQUEST_METHOD'] = 'GET';
+$_GET = $_POST = $_FILES = [];
 
 if (isset($_SERVER['argv'])) {
 	$_SERVER['REQUEST_ID'] = md5(serialize($_SERVER['argv']));

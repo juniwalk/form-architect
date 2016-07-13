@@ -20,6 +20,9 @@ final class ArchitectFactory
 	/** @var Factory */
 	private $factory;
 
+	/** @var Presenter */
+	private $presenter;
+
 
 	public function __construct()
 	{
@@ -27,6 +30,7 @@ final class ArchitectFactory
 		$response = new Response;
 
 		$this->factory = new Factory(new Session($request, $response), NULL);
+		$this->presenter = new Presenter;
 	}
 
 
@@ -36,7 +40,10 @@ final class ArchitectFactory
 	 */
 	public function createDesigner($identifier)
 	{
-		return $this->factory->createDesigner($identifier);
+		$designer = $this->factory->createDesigner($identifier);
+		$this->presenter->addComponent($designer, 'designer');
+
+		return $designer;
 	}
 
 
@@ -46,6 +53,9 @@ final class ArchitectFactory
 	 */
 	public function createRenderer($identifier)
 	{
-		return $this->factory->createRenderer($identifier);
+		$renderer = $this->factory->createRenderer($identifier);
+		$this->presenter->addComponent($renderer, 'renderer');
+
+		return $renderer;
 	}
 }
