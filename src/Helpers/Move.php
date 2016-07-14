@@ -12,11 +12,6 @@ namespace JuniWalk\FormArchitect\Helpers;
 
 final class Move
 {
-	private function __construct()
-	{
-	}
-
-
 	/**
 	 * @param  array  $holder
 	 * @param  int    $index
