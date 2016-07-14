@@ -13,8 +13,10 @@
 
 namespace JuniWalk\FormArchitect\Tests\Cases;
 
-use JuniWalk\FormArchitect\Tests\Files\ArchitectFactory;
+use JuniWalk\FormArchitect\Controls\Section;
 use JuniWalk\FormArchitect\Renderer;
+use JuniWalk\FormArchitect\Tests\Files\ArchitectFactory;
+use JuniWalk\FormArchitect\Tests\Files\Template;
 use nette\Utils\Html;
 use Nette\Utils\Random;
 use Tester\Assert;
@@ -153,6 +155,17 @@ final class RendererTest extends \Tester\TestCase
 
 		Assert::same(1, $renderer->getLastStep());
 		Assert::same(0, $renderer->getStep());
+	}
+
+
+	public function testRender()
+	{
+		$renderer = $this->getRenderer();
+		$renderer->setScheme($this->scheme);
+
+		$renderer->onBeforeRender($renderer, $template = new Template);
+
+		Assert::type(Section::class, $template->get('section'));
 	}
 
 
