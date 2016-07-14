@@ -11,12 +11,16 @@
 namespace JuniWalk\FormArchitect;
 
 use JuniWalk\FormArchitect\Controls\InputProvider;
+use JuniWalk\FormArchitect\Controls\Section;
+use Nette\Application\UI\ITemplate;
 use Nette\Application\UI\Form;
+use Nette\Forms\Container;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Html;
 
 /**
  * @property Itranslator $translator
+ * @method void onBeforeRender(Renderer $renderer, ITemplate $template)
  * @method void onFormSubmit(Form $form, array $data, Renderer $renderer)
  * @method void onFormStep(Form $form, array $data, Renderer $renderer)
  */
@@ -233,45 +237,12 @@ final class Renderer extends BaseArchitect
 	}
 
 
-	public function render()
+	/**
+	 * @return string
+	 */
+	public function getDefaultTemplateFile()
 	{
-		$template = $this->getTemplate();
-		$template->setFile(__DIR__.'/templates/renderer.latte');
-		$template->setTranslator($this->translator);
-
-		$template->add('footerText', $this->footerText);
-		$template->add('panelStyle', $this->panelStyle);
-
-		foreach ($this->getComponents() as $component) {
-			$this->removeComponent($component);
-		}
-
-		$form = $this->getComponent('form', TRUE);
-		$sectionToRender = $this->getSection();
-
-		foreach ($this->getScheme() as $key => $values) {
-			if ($key !== $sectionToRender) {
-				continue;
-			}
-
-			$section = $this->addSection($key);
-			$section->setScheme($values);
-
-			$page = $form->addContainer($section->getName());
-
-			foreach ($section->getFields() as $field) {
-				if (!$field instanceof InputProvider) {
-					continue;
-				}
-
-				$field->createInput($page);
-			}
-
-			$template->add('section', $section);
-		}
-
-		$form->setDefaults($this->getCache()->data ?: []);
-		$template->render();
+		return __DIR__.'/templates/renderer.latte';
 	}
 
 
@@ -290,6 +261,17 @@ final class Renderer extends BaseArchitect
 
 	protected function startup()
 	{
+		$this->onBeforeRender[] = function (self $self, ITemplate $template) {
+			$this->clearSections();
+
+			$form = $this->getComponent('form', TRUE);
+			$form->setDefaults($this->getCache()->data ?: []);
+
+			$template->add('section', $this->createSection($this->getSection(), $form));
+			$template->add('footerText', $this->footerText);
+			$template->add('panelStyle', $this->panelStyle);
+		};
+
 		$this->onSchemeChange[] = function () {
 			$this->redrawControl('section');
 			$this->clearCache();
@@ -309,12 +291,12 @@ final class Renderer extends BaseArchitect
 	{
 		$form = new Form($this, $name);
 		$form->setTranslator($this->translator);
-		$form->onSuccess[] = function ($form) {
+		$form->onSuccess[] = function (Form $form) {
 			$values = array_diff_key($form->getHttpData(), [
-				'_do' => TRUE,
-				'_submit' => TRUE,
-				'_forward' => TRUE,
-				'_back' => TRUE,
+				'_do' => NULL,
+				'_submit' => NULL,
+				'_forward' => NULL,
+				'_back' => NULL,
 			]);
 
 			$this->onFormStep($form, $values, $this);
@@ -338,6 +320,44 @@ final class Renderer extends BaseArchitect
 		$form->addSubmit('_submit');
 
 		return $form;
+	}
+
+
+	/**
+	 * @param  string  $name
+	 * @param  Form    $form
+	 * @return Section|NULL
+	 */
+	private function createSection($name, Form $form)
+	{
+		$section = $this->addSection($name);
+		$scheme = $this->getScheme();
+
+		if (isset($scheme[$name])) {
+			$section->setScheme($scheme[$name]);
+		}
+
+		$page = $form->addContainer($section->getName());
+
+		foreach ($section->getFields() as $field) {
+			if (!$field instanceof InputProvider) {
+				continue;
+			}
+
+			$field->createInput($page);
+		}
+
+		return $section;
+	}
+
+
+	private function clearSections()
+	{
+		$components = $this->getComponents();
+
+		foreach ($components as $component) {
+			$this->removeComponent($component);
+		}
 	}
 
 

@@ -12,6 +12,7 @@ namespace JuniWalk\FormArchitect;
 
 /**
  * @property Itranslator $translator
+ * @method void onBeforeRender(Designer $designer, $template)
  * @method void onSchemeChange()
  * @method void onSchemeSave()
  */
@@ -66,12 +67,12 @@ final class Designer extends BaseArchitect
 	}
 
 
-	public function render()
+	/**
+	 * @return string
+	 */
+	public function getDefaultTemplateFile()
 	{
-		$template = $this->getTemplate();
-		$template->setFile(__DIR__.'/templates/designer.latte');
-		$template->setTranslator($this->translator);
-		$template->render();
+		return __DIR__.'/templates/designer.latte';
 	}
 
 

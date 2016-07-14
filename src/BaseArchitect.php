@@ -19,6 +19,7 @@ use Nette\Http\Session;
 
 /**
  * @property Itranslator $translator
+ * @method void onBeforeRender(BaseArchitect $architect, $template)
  * @method void onSchemeChange()
  * @method void onSchemeSave()
  */
@@ -29,6 +30,12 @@ abstract class BaseArchitect extends Controls\Control implements Controls\Archit
 
 	/** @var string */
 	private $identifier;
+
+	/** @var string|NULL */
+	private $templateFile;
+
+	/** @var callable[] */
+	public $onBeforeRender = [];
 
 	/** @var callable[] */
 	public $onSchemeChange = [];
@@ -56,6 +63,30 @@ abstract class BaseArchitect extends Controls\Control implements Controls\Archit
 	{
 		return $this->identifier;
 	}
+
+
+	/**
+	 * @param string|NULL  $templateFile
+	 */
+	public function setTemplateFile($templateFile = NULL)
+	{
+		$this->templateFile = $templateFile;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getTemplateFile()
+	{
+		return $this->templateFile ?: $this->getDefaultTemplateFile();
+	}
+
+
+	/**
+	 * @return string
+	 */
+	abstract public function getDefaultTemplateFile();
 
 
 	/**
@@ -103,10 +134,16 @@ abstract class BaseArchitect extends Controls\Control implements Controls\Archit
 	}
 
 
-	/**
-	 * @return NULL
-	 */
-	abstract public function render();
+	public function render()
+	{
+		$template = $this->getTemplate();
+		$template->setFile($this->getTemplateFile());
+		$template->setTranslator($this->translator);
+
+		$this->onBeforeRender($this, $template);
+
+		$template->render();
+	}
 
 
 	/**
@@ -126,7 +163,7 @@ abstract class BaseArchitect extends Controls\Control implements Controls\Archit
 
 	/**
 	 * @param  IComponent  $child
-	 * @throws Nette\InvalidStateException
+	 * @throws \Nette\InvalidStateException
 	 */
 	protected function validateChildComponent(IComponent $child)
 	{
