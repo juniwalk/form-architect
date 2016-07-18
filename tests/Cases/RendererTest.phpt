@@ -11,8 +11,6 @@
  * @license   MIT License
  */
 
-namespace JuniWalk\FormArchitect\Tests\Cases;
-
 use JuniWalk\FormArchitect\Controls\Section;
 use JuniWalk\FormArchitect\Renderer;
 use JuniWalk\FormArchitect\Tests\Files\ArchitectFactory;
@@ -29,52 +27,12 @@ final class RendererTest extends \Tester\TestCase
 	private $renderer;
 
 	/**@var string[] */
-	private $defaults = [
-		'page1' => ['question' => 'Answer 2'],
-		'page2' => ['question' => 'Text answer'],
-	];
-
-	/**@var string[] */
-	private $scheme = [
-		'page1' => [
-			'class' => 'JuniWalk\FormArchitect\Controls\Sections\Page',
-			'title' => [
-				'class' => 'JuniWalk\FormArchitect\Controls\Fields\Title',
-				'content' => 'Page 1',
-			],
-			'question' => [
-				'class' => 'JuniWalk\FormArchitect\Controls\Fields\Question',
-				'title' => 'Question',
-				'isRequired' => TRUE,
-				'description' => 'Question description',
-				'options' => [
-					['option' => 'Answer 1'],
-					['option' => 'Answer 2'],
-					['option' => 'Answer 3'],
-				],
-				'multiple' => FALSE,
-				'type' => 'select',
-			],
-		],
-		'page2' => [
-			'class' => 'JuniWalk\FormArchitect\Controls\Sections\Page',
-			'title' => [
-				'class' => 'JuniWalk\FormArchitect\Controls\Fields\Title',
-				'content' => 'Page 2',
-			],
-			'question' => [
-				'class' => 'JuniWalk\FormArchitect\Controls\Fields\Question',
-				'title' => 'Question',
-				'isRequired' => FALSE,
-				'description' => 'Question description',
-				'type' => 'text',
-			],
-		],
-	];
+	private $scheme = [];
 
 
 	public function __construct()
 	{
+		$this->scheme = include __DIR__.'/../Data/scheme.php';
 		$this->renderer = (new ArchitectFactory)
 			->createRenderer(Random::generate(8));
 	}
@@ -93,7 +51,10 @@ final class RendererTest extends \Tester\TestCase
 	{
 		$renderer = $this->getRenderer();
 		$renderer->setScheme($this->scheme);
-		$renderer->setDefaults($this->defaults);
+		$renderer->setDefaults([
+			'page1' => ['question' => 'Answer 2'],
+			'page2' => ['question' => 'Text answer'],
+		]);
 
 		$scheme = $renderer->getScheme();
 		$renderer->onSchemeChange();
@@ -210,7 +171,6 @@ final class RendererTest extends \Tester\TestCase
 		$form->setSubmittedBy($form['_submit']);
 		$form->fireEvents();
 	}
-
 }
 
 (new RendererTest)->run();

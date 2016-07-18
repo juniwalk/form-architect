@@ -11,8 +11,6 @@
  * @license   MIT License
  */
 
-namespace JuniWalk\FormArchitect\Tests\Cases;
-
 use JuniWalk\FormArchitect\Tests\Files\ArchitectFactory;
 use JuniWalk\FormArchitect\Designer;
 use JuniWalk\FormArchitect\Renderer;

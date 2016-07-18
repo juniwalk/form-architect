@@ -11,8 +11,6 @@
  * @license   MIT License
  */
 
-namespace JuniWalk\FormArchitect\Tests\Cases;
-
 use JuniWalk\FormArchitect\Tests\Files\ArchitectFactory;
 use JuniWalk\FormArchitect\Designer;
 use Nette\Utils\Random;
@@ -26,19 +24,12 @@ final class DesignerTest extends \Tester\TestCase
 	private $designer;
 
 	/**@var string[] */
-	private $scheme = [
-		'mySection' => [
-			'class' => 'JuniWalk\FormArchitect\Controls\Sections\Page',
-			'sectionTitle' => [
-				'class' => 'JuniWalk\FormArchitect\Controls\Fields\Title',
-				'content' => 'Form title',
-			],
-		],
-	];
+	private $scheme = [];
 
 
 	public function __construct()
 	{
+		$this->scheme = include __DIR__.'/../Data/scheme.php';
 		$this->designer = (new ArchitectFactory)
 			->createDesigner(Random::generate(8));
 	}
@@ -74,7 +65,7 @@ final class DesignerTest extends \Tester\TestCase
 		$scheme = $designer->getScheme();
 
 		Assert::type('array', $scheme);
-		Assert::count(2, $scheme);
+		Assert::count(3, $scheme);
 	}
 
 

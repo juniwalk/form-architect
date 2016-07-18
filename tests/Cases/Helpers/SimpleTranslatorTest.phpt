@@ -11,8 +11,6 @@
  * @license   MIT License
  */
 
-namespace JuniWalk\FormArchitect\Tests\Cases;
-
 use JuniWalk\FormArchitect\Helpers\SimpleTranslator;
 use Nette\Utils\Html;
 use Tester\Assert;
