@@ -39,14 +39,14 @@ final class Question extends BaseField implements InputProvider
 
 
 	/**
-	 * @param string  $type
+	 * @param  string  $type
+	 * @throws Exception
 	 */
 	public function handleType($type)
 	{
-		$scheme = $this->getScheme();
-		$scheme['type'] = $type;
+		$this->setType($type);
 
-		$this->setScheme($scheme);
+		$this->setScheme($this->getScheme());
 		$this->getArchitect()->onSchemeChange();
 	}
 

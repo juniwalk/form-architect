@@ -15,6 +15,10 @@ return [
 			'class' => 'JuniWalk\FormArchitect\Controls\Fields\Title',
 			'content' => 'Page 1',
 		],
+		'description' => [
+			'class' => 'JuniWalk\FormArchitect\Controls\Fields\Description',
+			'content' => '<p>This is a <b>description</b>. :)<br></p>',
+		],
 		'question' => [
 			'class' => 'JuniWalk\FormArchitect\Controls\Fields\Question',
 			'title' => 'Question',
@@ -27,6 +31,17 @@ return [
 			],
 			'multiple' => FALSE,
 			'type' => 'select',
+		],
+		'choice' => [
+			'class' => 'JuniWalk\FormArchitect\Controls\Fields\Question',
+			'title' => 'Gender',
+			'isRequired' => FALSE,
+			'options' => [
+				['option' => 'Male'],
+				['option' => 'Female'],
+			],
+			'inline' => TRUE,
+			'type' => 'radio',
 		],
 	],
 	'page2' => [
