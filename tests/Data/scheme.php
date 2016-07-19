@@ -46,10 +46,6 @@ return [
 	],
 	'page2' => [
 		'class' => 'JuniWalk\FormArchitect\Controls\Sections\Page',
-		'title' => [
-			'class' => 'JuniWalk\FormArchitect\Controls\Fields\Title',
-			'content' => 'Page 2',
-		],
 		'question' => [
 			'class' => 'JuniWalk\FormArchitect\Controls\Fields\Question',
 			'title' => 'Question',
