@@ -15,7 +15,7 @@ final class Title extends BaseField
 	/**
 	 * @return bool
 	 */
-	public function isSortable()
+	public function hasToolbar()
 	{
 		return FALSE;
 	}
@@ -24,7 +24,16 @@ final class Title extends BaseField
 	/**
 	 * @return bool
 	 */
-	public function hasToolbar()
+	public function isCloneable()
+	{
+		return FALSE;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function isSortable()
 	{
 		return FALSE;
 	}

@@ -15,6 +15,17 @@ use JuniWalk\FormArchitect\Controls\Fields\Title;
 final class Page extends BaseSection
 {
 	/**
+	 * @param  string|NULL  $name
+	 * @return Title
+	 * @throws Exception
+	 */
+	public function addTitle($name = NULL)
+	{
+		return $this->addField($name, Title::class);
+	}
+
+
+	/**
 	 * @return string
 	 */
 	public function getTitle()

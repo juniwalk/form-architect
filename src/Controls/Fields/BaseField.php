@@ -179,6 +179,15 @@ abstract class BaseField extends Control implements Field
 	/**
 	 * @return bool
 	 */
+	public function isCloneable()
+	{
+		return TRUE;
+	}
+
+
+	/**
+	 * @return bool
+	 */
 	public function isSortable()
 	{
 		return TRUE;

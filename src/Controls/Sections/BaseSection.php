@@ -14,7 +14,6 @@ use JuniWalk\FormArchitect\Controls\Control;
 use JuniWalk\FormArchitect\Controls\Field;
 use JuniWalk\FormArchitect\Controls\Fields\Description;
 use JuniWalk\FormArchitect\Controls\Fields\Question;
-use JuniWalk\FormArchitect\Controls\Fields\Title;
 use JuniWalk\FormArchitect\Controls\Section;
 use Nette\ComponentModel\IComponent;
 
@@ -65,7 +64,7 @@ abstract class BaseSection extends Control implements Section
 		}
 
 		foreach ($this->getFields() as $field) {
-			if ($field instanceof Title) {
+			if (!$field->isCloneable()) {
 				continue;
 			}
 
@@ -103,17 +102,6 @@ abstract class BaseSection extends Control implements Section
 
 		$this->addComponent($field = new $class($architect, $form), $name);
 		return $field;
-	}
-
-
-	/**
-	 * @param  string|NULL  $name
-	 * @return Title
-	 * @throws Exception
-	 */
-	public function addTitle($name = NULL)
-	{
-		return $this->addField($name, Title::class);
 	}
 
 

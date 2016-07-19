@@ -40,6 +40,12 @@ interface Field
 	/**
 	 * @return bool
 	 */
+	public function isCloneable();
+
+
+	/**
+	 * @return bool
+	 */
 	public function isSortable();
 
 
