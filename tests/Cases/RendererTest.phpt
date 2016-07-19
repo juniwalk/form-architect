@@ -47,6 +47,18 @@ final class RendererTest extends \Tester\TestCase
 	}
 
 
+	public function testTemplateFile()
+	{
+		$renderer = $this->getRenderer();
+
+		Assert::same($renderer->getDefaultTemplateFile(), $renderer->getTemplateFile());
+
+		$renderer->setTemplateFile(__FILE__);
+
+		Assert::same(__FILE__, $renderer->getTemplateFile());
+	}
+
+
 	public function testScheme()
 	{
 		$renderer = $this->getRenderer();

@@ -44,6 +44,18 @@ final class DesignerTest extends \Tester\TestCase
 	}
 
 
+	public function testTemplateFile()
+	{
+		$designer = $this->getDesigner();
+
+		Assert::same($designer->getDefaultTemplateFile(), $designer->getTemplateFile());
+
+		$designer->setTemplateFile(__FILE__);
+
+		Assert::same(__FILE__, $designer->getTemplateFile());
+	}
+
+
 	public function testScheme()
 	{
 		$designer = $this->getDesigner();
