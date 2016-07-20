@@ -63,7 +63,7 @@ final class RendererTest extends \Tester\TestCase
 	{
 		$renderer = $this->getRenderer();
 		$renderer->setScheme($this->scheme);
-		$renderer->setDefaults([
+		$renderer->setValues([
 			'page1' => ['question' => 'Answer 2'],
 			'page2' => ['question' => 'Text answer'],
 		]);

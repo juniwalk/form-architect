@@ -160,11 +160,20 @@ final class Renderer extends BaseArchitect
 
 
 	/**
-	 * @param  array  $defaults
+	 * @param  array  $values
 	 */
-	public function setDefaults(array $defaults = [])
+	public function setValues(array $values = [])
 	{
-		$this->getCache()->data = $defaults;
+		$this->getCache()->data = $values;
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getValues()
+	{
+		return (array) $this->getCache()->data;
 	}
 
 
@@ -265,11 +274,12 @@ final class Renderer extends BaseArchitect
 			$this->clearSections();
 
 			$form = $this->getComponent('form', TRUE);
-			$form->setDefaults($this->getCache()->data ?: []);
 
 			$template->add('section', $this->createSection($this->getSection(), $form));
 			$template->add('footerText', $this->footerText);
 			$template->add('panelStyle', $this->panelStyle);
+
+			$form->setValues($this->getValues());
 		};
 
 		$this->onSchemeChange[] = function () {
@@ -305,7 +315,8 @@ final class Renderer extends BaseArchitect
 				return $this->setStep($this->getStep() - 1);
 			}
 
-			$values = $this->mergeValues($values);
+			$values = $values + $this->getValues();
+			$this->setValues($values);
 
 			if ($form['_forward']->isSubmittedBy()) {
 				return $this->setStep($this->getStep() + 1);
@@ -337,13 +348,10 @@ final class Renderer extends BaseArchitect
 			$section->setScheme($scheme[$name]);
 		}
 
+		$fields = $section->getComponents(FALSE, InputProvider::class);
 		$page = $form->addContainer($section->getName());
 
-		foreach ($section->getFields() as $field) {
-			if (!$field instanceof InputProvider) {
-				continue;
-			}
-
+		foreach ($fields as $field) {
 			$field->createInput($page);
 		}
 
@@ -363,17 +371,7 @@ final class Renderer extends BaseArchitect
 
 	private function clearCache()
 	{
-		$this->getCache()->data = NULL;
-		$this->getCache()->step = NULL;
-	}
-
-
-	/**
-	 * @param  array  $values
-	 * @return array
-	 */
-	private function mergeValues(array $values = [])
-	{
-		return $this->getCache()->data = array_merge((array) $this->getCache()->data, $values);
+		$this->setValues([]);
+		$this->setStep(0);
 	}
 }
