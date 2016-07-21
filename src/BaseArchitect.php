@@ -21,7 +21,7 @@ use Nette\Http\Session;
  * @property Itranslator $translator
  * @method void onBeforeRender(BaseArchitect $architect, $template)
  * @method void onSchemeChange()
- * @method void onSchemeSave()
+ * @method void onSchemeSave(BaseArchitect $architect)
  */
 abstract class BaseArchitect extends Controls\Control implements Controls\Architect
 {
@@ -184,7 +184,7 @@ abstract class BaseArchitect extends Controls\Control implements Controls\Archit
 		$form = new Form($this, $name);
 		$form->setTranslator($this->translator);
 		$form->onSuccess[] = function () {
-			$this->onSchemeSave();
+			$this->onSchemeSave($this);
 		};
 
 		$form->addSubmit('save');
