@@ -9,3 +9,19 @@ Form Architect
 [![License](https://img.shields.io/packagist/l/juniwalk/form-architect.svg?style=flat-square)](https://mit-license.org)
 
 Nette Framework component that lets you dynamically design forms.
+
+Installation & usage
+--------------------
+
+Please use composer to install this package.
+```
+$ composer require juniwalk/form-architect:^1.0
+```
+
+register extension in your `config.neon`
+```yml
+extensions:
+  - JuniWalk\FormArchitect\DI\FormArchitectExtension
+```
+
+then check [examples](docs/examples) for more information on how to setup the Architect.
