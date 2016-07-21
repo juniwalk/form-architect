@@ -82,14 +82,11 @@ final class Designer extends BaseArchitect
 
 		$this->onSchemeChange[] = function () {
 			$this->redrawControl('sections');
-			$this->onSchemeSave();
+			$this->onSchemeSave($this);
 		};
 
 		$this->onSchemeSave[] = function () {
-			if (!$this->isControlInvalid()) {
-				$this->redrawControl('empty');
-			}
-
+			$this->isControlInvalid() || $this->redrawControl('empty');
 			$this->schemeSave();
 		};
 	}
