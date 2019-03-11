@@ -1,45 +1,43 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
- * @author    Martin Procházka <juniwalk@outlook.cz>
- * @package   FormArchitect
- * @link      https://github.com/juniwalk/form-architect
  * @copyright Martin Procházka (c) 2016
  * @license   MIT License
  */
 
 namespace JuniWalk\FormArchitect;
 
+use JuniWalk\FormArchitect\Caches\Cache;
 use Nette\Http\Session;
 use Nette\Localization\ITranslator;
 
 class ArchitectFactory
 {
-	/** @var Session */
-	private $session;
+	/** @var Cache */
+	private $cache;
 
 	/** @var ITranslator */
 	private $translator;
 
 
 	/**
-	 * @param Session           $session
-	 * @param ITranslator|NULL  $translator
+	 * @param Cache  $cache
+	 * @param ITranslator|null  $translator
 	 */
-	public function __construct(Session $session, ITranslator $translator = NULL)
+	public function __construct(Cache $cache, ITranslator $translator = null)
 	{
 		$this->translator = $translator ?: new Helpers\SimpleTranslator;
-		$this->session = $session;
+		$this->cache = $cache;
 	}
 
 
 	/**
-	 * @param  string  $identifier
+	 * @param  string  $form
 	 * @return Designer
 	 */
-	public function createDesigner($identifier)
+	public function createDesigner(string $form): Designer
 	{
-		$designer = new Designer($identifier, $this->session);
+		$designer = new Designer($form, clone $this->cache);
 		$designer->setTranslator($this->translator);
 
 		return $designer;
@@ -47,12 +45,12 @@ class ArchitectFactory
 
 
 	/**
-	 * @param  string  $identifier
+	 * @param  string  $form
 	 * @return Renderer
 	 */
-	public function createRenderer($identifier)
+	public function createRenderer(string $form): Renderer
 	{
-		$renderer = new Renderer($identifier, $this->session);
+		$renderer = new Renderer($form, clone $this->cache);
 		$renderer->setTranslator($this->translator);
 
 		return $renderer;

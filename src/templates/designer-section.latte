@@ -1,43 +1,50 @@
-<article class="panel panel-default bg-purple fd-section">
+<article n:class="panel, $colorClass">
 {formContainer $control->getForm()}
 
 	<div class="panel-heading">
-		<div class="panel-title">{_'form-architect.designer.section'}</div>
-		<div class="fd-toolbar">
-			<a n:href="clone!" class="fd-tool ajax">
-				<i class="fa fa-copy"></i>
-			</a>
-			<a n:href="merge!" class="fd-tool ajax" n:if="$control->isMergeAllowed()">
-				<i class="fa fa-compress"></i>
-			</a>
-			<a n:href="remove!" class="fd-tool ajax" n:if="$control->isDeleteAllowed()">
-				<i class="fa fa-trash-o"></i>
-			</a>
+
+		<div class="btn-toolbar pull-right">
+
+			<div class="btn-group">
+				<a type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{_form-architect.designer.settings|noescape}</a>
+				<ul class="dropdown-menu dropdown-menu-right">
+					<li n:class="!$control->hasUpwardMove() ? disabled"><a n:attr="href => $control->hasUpwardMove() ? $control->link('moveUp!')" class="ajax">{_form-architect.settings.move-up|noescape}</a></li>
+					<li n:class="!$control->hasDownwardMove() ? disabled"><a n:attr="href => $control->hasDownwardMove() ? $control->link('moveDown!')" class="ajax">{_form-architect.settings.move-down|noescape}</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a n:href="clone!" class="ajax">{_form-architect.settings.clone|noescape}</a></li>
+					<li n:class="!$control->isMergeAllowed() ? disabled"><a n:attr="href => $control->isMergeAllowed() ? $control->link('merge!')" class="ajax">{_form-architect.settings.merge|noescape}</a></li>
+					<li n:class="!$control->isDeleteAllowed() ? disabled"><a n:attr="href => $control->isDeleteAllowed() ? $control->link('remove!')" class="ajax">{_form-architect.settings.delete|noescape}</a></li>
+				</ul>
+			</div>
+
 		</div>
+
+		<div class="panel-title">{_form-architect.designer.section|noescape}</div>
+
 	</div>
 
-{foreach $control->getFields() as $field}
+	<section class="panel-body" n:inner-foreach="$control->getInputs() as $input">
 
-	{control $field}
+		{control $input}
 
-{/foreach}
+		<hr n:if="!$iterator->isLast()">
 
-	<nav class="panel-footer">
+	</section>
 
-		<a n:href="addQuestion!" class="btn btn-default ajax">
-			<i class="fa fa-question"></i>
-			<span class="hidden-xs">{_'form-architect.designer.section-question'}</span>
-		</a>
-		<a n:href="addDescription!" class="btn btn-default ajax">
-			<i class="fa fa-font"></i>
-			<span class="hidden-xs">{_'form-architect.designer.section-description'}</span>
-		</a>
+	<div class="panel-footer">
 
-	</nav>
+		<nav class="btn-toolbar">
+			<a n:href="addQuestion!" class="btn btn-default ajax">{_form-architect.section.question|noescape}</a>
+			<a n:href="addCaptcha!" class="btn btn-default ajax">{_form-architect.section.captcha|noescape}</a>
+			<a n:href="addDescription!" class="btn btn-default ajax">{_form-architect.section.description|noescape}</a>
+		</nav>
 
-	<div class="fd-overlay animate invisible">
-		<i class="fa fa-refresh fa-spin"></i>
 	</div>
 
 {/formContainer}
+
+	<div class="fa-overlay invisible">
+		<i class="fas fa-sync-alt fa-spin"></i>
+	</div>
+
 </article>

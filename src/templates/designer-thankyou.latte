@@ -1,0 +1,37 @@
+<article n:class="panel, $colorClass">
+{formContainer $control->getForm()}
+
+	<div class="panel-heading">
+
+		<div class="btn-toolbar pull-right">
+            <a n:href="remove!" n:if="$control->isDeleteAllowed()" class="btn btn-xs btn-danger ajax">{_form-architect.designer.delete|noescape}</a>
+		</div>
+
+		<div class="panel-title">{_form-architect.designer.thankyou|noescape}</div>
+
+	</div>
+
+	<section class="panel-body">
+
+		<div class="form-group">
+			<label n:name="redirect">{_form-architect.thankyou.redirect}</label>
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fas fa-globe"></i></span>
+				<input n:name="redirect" type="text" class="form-control" data-autosave>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label n:name="description">{_form-architect.thankyou.description}</label>
+			<textarea n:name="description" class="form-control wysiwyg" data-autosave></textarea>
+		</div>
+
+	</section>
+
+{/formContainer}
+
+	<div class="fa-overlay invisible">
+		<i class="fas fa-sync-alt fa-spin"></i>
+	</div>
+
+</article>

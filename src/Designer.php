@@ -1,33 +1,38 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
- * @author    Martin Procházka <juniwalk@outlook.cz>
- * @package   FormArchitect
- * @link      https://github.com/juniwalk/form-architect
  * @copyright Martin Procházka (c) 2016
  * @license   MIT License
  */
 
 namespace JuniWalk\FormArchitect;
 
-/**
- * @property Itranslator $translator
- * @method void onBeforeRender(Designer $designer, $template)
- * @method void onSchemeChange()
- * @method void onSchemeSave()
- */
-final class Designer extends BaseArchitect
+final class Designer extends AbstractArchitect
 {
-	public function handleAddSection()
+	/**
+	 * @return void
+	 */
+	public function handleAddSection(): void
 	{
-		$title = $this->addSection()->addTitle();
-
-		$title->setScheme();
+		$this->addSection(null, Sections\Page::class);
 		$this->onSchemeChange();
 	}
 
 
-	public function handleStartOver()
+	/**
+	 * @return void
+	 */
+	public function handleAddThankYouPage(): void
+	{
+		$this->getThankYouPage() || $this->addThankYouPage(Sections\ThankYouPage::class);
+		$this->onSchemeChange();
+	}
+
+
+	/**
+	 * @return void
+	 */
+	public function handleStartOver(): void
 	{
 		$this->setScheme();
 		$this->onSchemeChange();
@@ -35,14 +40,18 @@ final class Designer extends BaseArchitect
 
 
 	/**
-	 * @return array
+	 * @return iterable
 	 */
-	public function getScheme()
+	public function getScheme(): iterable
 	{
-		$scheme = [];
+		$scheme = parent::getScheme();
 
 		foreach ($this->getSections() as $key => $section) {
-			$scheme[$key] = $section->getScheme();
+			$scheme['sections'][$key] = $section->getScheme();
+		}
+
+		if ($thankYou = $this->getThankYouPage()) {
+			$scheme['thankYou'] = $thankYou->getScheme();
 		}
 
 		return $scheme;
@@ -50,56 +59,74 @@ final class Designer extends BaseArchitect
 
 
 	/**
-	 * @param array  $scheme
+	 * @param  iterable  $scheme
+	 * @return void
 	 */
-	public function setScheme(array $scheme = [])
+	public function setScheme(iterable $scheme = []): void
 	{
 		foreach ($this->getComponents() as $component) {
 			$this->removeComponent($component);
 		}
 
-		unset($scheme['class']);
-
-		foreach ($scheme as $key => $values) {
-			$section = $this->addSection($key);
-			$section->setScheme($values);
+		foreach ($scheme['sections'] ?? [] as $name => $section) {
+			$this->addSection($name, $section['class'])->setScheme($section);
 		}
+
+		if ($thankYou = $scheme['thankYou'] ?? []) {
+			$this->addThankYouPage($thankYou['class'])->setScheme($thankYou);
+		}
+
+		parent::setScheme($scheme);
 	}
 
 
 	/**
 	 * @return string
 	 */
-	public function getDefaultTemplateFile()
+	public function getDefaultTemplateFile(): string
 	{
 		return __DIR__.'/templates/designer.latte';
 	}
 
 
-	protected function startup()
+	/**
+	 * @return void
+	 */
+	protected function startup(): void
 	{
 		$this->schemeLoad();
 
-		$this->onSchemeChange[] = function () {
+		$this->onSchemeChange[] = function() {
 			$this->redrawControl('sections');
+			$this->redrawControl('thankYou');
 			$this->onSchemeSave($this);
 		};
 
-		$this->onSchemeSave[] = function () {
+		$this->onSchemeSave[] = function() {
 			$this->isControlInvalid() || $this->redrawControl('empty');
 			$this->schemeSave();
+
+			if (!$this->getPresenter()->isAjax()) {
+				$this->redirect('this');
+			}
 		};
 	}
 
 
-	private function schemeLoad()
+	/**
+	 * @return void
+	 */
+	private function schemeLoad(): void
 	{
-		$this->setScheme($this->getCache()->scheme ?: []);
+		$this->setScheme($this->getCache()->getScheme());
 	}
 
 
-	private function schemeSave()
+	/**
+	 * @return void
+	 */
+	private function schemeSave(): void
 	{
- 		$this->getCache()->scheme = $this->getScheme();
+		$this->getCache()->setScheme($this->getScheme());
 	}
 }

@@ -1,49 +1,18 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
- * @author    Martin Procházka <juniwalk@outlook.cz>
- * @package   FormArchitect
- * @link      https://github.com/juniwalk/form-architect
  * @copyright Martin Procházka (c) 2016
  * @license   MIT License
  */
 
 namespace JuniWalk\FormArchitect;
 
-use JuniWalk\FormArchitect\Controls\InputProvider;
-use JuniWalk\FormArchitect\Controls\Section;
-use Nette\Application\UI\ITemplate;
-use Nette\Application\UI\Form;
+use Nette\Application\UI;
 use Nette\Forms\Container;
 use Nette\Utils\ArrayHash;
-use Nette\Utils\Html;
 
-/**
- * @property Itranslator $translator
- * @method void onBeforeRender(Renderer $renderer, ITemplate $template)
- * @method void onFormSubmit(Form $form, array $data, Renderer $renderer)
- * @method void onFormStep(Form $form, array $data, Renderer $renderer)
- */
-final class Renderer extends BaseArchitect
+final class Renderer extends AbstractArchitect
 {
-	/** @var string */
-	const PANEL_CLEAR = 'panel-clear';
-	const PANEL_DANGER = 'panel-danger';
-	const PANEL_DEFAULT = 'panel-default';
-	const PANEL_INFO = 'panel-info';
-	const PANEL_PRIMARY = 'panel-primary';
-	const PANEL_WARNING = 'panel-warning';
-
-
-	/** @var bool */
-	private $hasSectionTitle = TRUE;
-
-	/** @var string */
-	private $panelStyle = self::PANEL_PRIMARY;
-
-	/** @var string|Html */
-	private $footerText = NULL;
-
 	/** @var string[] */
 	private $steps = [];
 
@@ -54,14 +23,30 @@ final class Renderer extends BaseArchitect
 	public $onFormStep = [];
 
 
-	public function handleNextStep()
+	/**
+	 * @return void
+	 */
+	public function handleFirstStep(): void
+	{
+		$this->clearCache();
+		$this->redrawControl('section');
+	}
+
+
+	/**
+	 * @return void
+	 */
+	public function handleNextStep(): void
 	{
 		$this->setStep($this->getStep() + 1);
 		$this->redrawControl('section');
 	}
 
 
-	public function handlePrevStep()
+	/**
+	 * @return void
+	 */
+	public function handlePrevStep(): void
 	{
 		$this->setStep($this->getStep() - 1);
 		$this->redrawControl('section');
@@ -69,129 +54,68 @@ final class Renderer extends BaseArchitect
 
 
 	/**
-	 * @param string|Html|NULL  $footerText
+	 * @param  iterable  $scheme
+	 * @return void
 	 */
-	public function setFooterText($footerText = NULL)
+	public function setScheme(iterable $scheme = []): void
 	{
-		if (!$footerText instanceof Html) {
-			$footerText = Html::el(NULL, $footerText);
+		parent::setScheme($scheme);
+
+		$this->steps = array_keys($scheme['sections'] ?? []);
+
+		if (isset($scheme['thankYou'])) {
+			$this->steps[] = 'thankYou';
 		}
 
-		$this->footerText = $footerText;
+		$this->getCache()->setScheme($scheme);
 	}
 
 
 	/**
-	 * @return Html|NULL
+	 * @return iterable
 	 */
-	public function getFooterText()
+	public function getScheme(): iterable
 	{
-		return $this->footerText;
+		return $this->getCache()->getScheme();
 	}
 
 
 	/**
-	 * @param  string  $panelStyle
-	 * @throws Exception
+	 * @param  iterable  $values
+	 * @return void
 	 */
-	public function setPanelStyle($panelStyle = self::PANEL_PRIMARY)
+	public function setValues(iterable $values = []): void
 	{
-		static $styles = [
-			self::PANEL_CLEAR,
-			self::PANEL_DANGER,
-			self::PANEL_DEFAULT,
-			self::PANEL_INFO,
-			self::PANEL_PRIMARY,
-			self::PANEL_WARNING,
-		];
-
-		if (!in_array($panelStyle, $styles)) {
-			throw new \Exception;
-		}
-
-		$this->panelStyle = $panelStyle;
+		$this->getCache()->setValues($values);
 	}
 
 
 	/**
-	 * @return string
+	 * @return iterable
 	 */
-	public function getPanelStyle()
+	public function getValues(): iterable
 	{
-		return $this->panelStyle;
+		return (array) $this->getCache()->getValues();
 	}
 
 
 	/**
-	 * @param bool  $hasSectionTitle
+	 * @param  int  $step
+	 * @return void
 	 */
-	public function setHasSectionTitle($hasSectionTitle = TRUE)
+	public function setStep(int $step): void
 	{
-		$this->hasSectionTitle = (bool) $hasSectionTitle;
-	}
-
-
-	/**
-	 * @return bool
-	 */
-	public function hasSectionTitle()
-	{
-		return $this->hasSectionTitle;
-	}
-
-
-	/**
-	 * @param array  $scheme
-	 */
-	public function setScheme(array $scheme = [])
-	{
-		$this->getCache()->scheme = $scheme;
-		$this->steps = array_keys($scheme);
-	}
-
-
-	/**
-	 * @return array
-	 */
-	public function getScheme()
-	{
-		return $this->getCache()->scheme;
-	}
-
-
-	/**
-	 * @param  array  $values
-	 */
-	public function setValues(array $values = [])
-	{
-		$this->getCache()->data = $values;
-	}
-
-
-	/**
-	 * @return array
-	 */
-	public function getValues()
-	{
-		return (array) $this->getCache()->data;
-	}
-
-
-	/**
-	 * @param int  $step
-	 */
-	public function setStep($step)
-	{
-		$this->getCache()->step = min(max($step, 0), $this->getLastStep());
+		$step = min(max($step, 0), $this->getLastStep());
+		$this->getCache()->setStep($step);
 	}
 
 
 	/**
 	 * @return int
 	 */
-	public function getStep()
+	public function getStep(): int
 	{
-		$step = $this->getCache()->step;
+		$step = $this->getCache()->getStep();
 
 		if (!$step || $step > $this->getLastStep()) {
 			return 0;
@@ -204,7 +128,7 @@ final class Renderer extends BaseArchitect
 	/**
 	 * @return int
 	 */
-	public function getLastStep()
+	public function getLastStep(): int
 	{
 		return sizeof($this->steps) - 1;
 	}
@@ -213,7 +137,7 @@ final class Renderer extends BaseArchitect
 	/**
 	 * @return string[]
 	 */
-	public function getSteps()
+	public function getSteps(): iterable
 	{
 		return $this->steps;
 	}
@@ -222,7 +146,7 @@ final class Renderer extends BaseArchitect
 	/**
 	 * @return bool
 	 */
-	public function hasSteps()
+	public function hasSteps(): bool
 	{
 		return sizeof($this->steps) > 1;
 	}
@@ -231,7 +155,7 @@ final class Renderer extends BaseArchitect
 	/**
 	 * @return bool
 	 */
-	public function isFirstStep()
+	public function isFirstStep(): bool
 	{
 		return $this->getStep() == 0;
 	}
@@ -240,136 +164,179 @@ final class Renderer extends BaseArchitect
 	/**
 	 * @return bool
 	 */
-	public function isLastStep()
+	public function isLastStep(): bool
 	{
 		return $this->getStep() == $this->getLastStep();
 	}
 
 
 	/**
+	 * @return bool
+	 */
+	public function showSubmit(): bool
+	{
+		$lastStep = $this->getLastStep();
+
+		if ($this->hasThankYouPage()) {
+			$lastStep = $lastStep - 1;
+		}
+
+		return $lastStep == $this->getStep();
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function hasThankYouPage(): bool
+	{
+		return in_array('thankYou', $this->steps);
+	}
+
+
+	/**
 	 * @return string
 	 */
-	public function getDefaultTemplateFile()
+	public function getDefaultTemplateFile(): string
 	{
 		return __DIR__.'/templates/renderer.latte';
 	}
 
 
 	/**
-	 * @return string|NULL
+	 * @return string|null
 	 */
-	protected function getSection()
+	protected function getSection(): ?string
 	{
 		if (empty($this->steps)) {
-			return NULL;
+			return null;
 		}
 
 		return $this->steps[$this->getStep()];
 	}
 
 
-	protected function startup()
+	/**
+	 * @return void
+	 */
+	protected function startup(): void
 	{
-		$this->onBeforeRender[] = function (self $self, ITemplate $template) {
-			$this->clearSections();
-
-			$form = $this->getComponent('form', TRUE);
-
-			$template->add('section', $this->createSection($this->getSection(), $form));
-			$template->add('footerText', $this->footerText);
-			$template->add('panelStyle', $this->panelStyle);
-
-			$form->setValues($this->getValues());
+		$this->onBeforeRender[] = function(self $self, UI\ITemplate $template) {
+			$this->onBeforeRender($template);
 		};
 
-		$this->onSchemeChange[] = function () {
+		$this->onSchemeChange[] = function() {
 			$this->redrawControl('section');
 			$this->clearCache();
 		};
 
-		$this->onFormStep[] = function () {
+		$this->onFormStep[] = function() {
 			$this->redrawControl('section');
+		};
+
+		$this->onFormSubmit[] = function() {
+			$this->flashMessage('submit-success', 'success');
 		};
 	}
 
 
 	/**
 	 * @param  string  $name
-	 * @return Form
+	 * @return UI\Form
 	 */
-	protected function createComponentForm($name)
+	protected function createComponentForm(string $name): UI\Form
 	{
-		$form = new Form($this, $name);
-		$form->setTranslator($this->translator);
-		$form->onSuccess[] = function (Form $form) {
-			$values = array_diff_key($form->getHttpData(), [
-				'_do' => NULL,
-				'_submit' => NULL,
-				'_forward' => NULL,
-				'_back' => NULL,
-			]);
-
-			$this->onFormStep($form, $values, $this);
-
-			if ($form['_back']->isSubmittedBy()) {
-				return $this->setStep($this->getStep() - 1);
-			}
-
-			$values = $values + $this->getValues();
-			$this->setValues($values);
-
-			if ($form['_forward']->isSubmittedBy()) {
-				return $this->setStep($this->getStep() + 1);
-			}
-
-			$this->clearCache();
-			$this->onFormSubmit($form, $values, $this);
-		};
-
-		$form->addSubmit('_back')->setValidationScope(FALSE);
+		$form = new UI\Form;
+		$form->setTranslator($this->getTranslator());
+		$form->addSubmit('_back')->setValidationScope(false);
 		$form->addSubmit('_forward');
 		$form->addSubmit('_submit');
+		$form->onSuccess[] = function (UI\Form $form) {
+			$step = $this->onFormSuccess($form);
+			$this->setStep($step);
+		};
 
 		return $form;
 	}
 
 
 	/**
-	 * @param  string  $name
-	 * @param  Form    $form
-	 * @return Section|NULL
+	 * @param  UI\Form  $form
+	 * @return int
 	 */
-	private function createSection($name, Form $form)
+	private function onFormSuccess(UI\Form $form): int
 	{
-		$section = $this->addSection($name);
+		$values = array_diff_key($form->getHttpData(), [
+			'_do' => null,
+			'_submit' => null,
+			'_forward' => null,
+			'_back' => null,
+		]);
+
+		$this->onFormStep($form, $values, $this);
+
+		if ($form['_back']->isSubmittedBy()) {
+			return $this->getStep() - 1;
+		}
+
+		$values = $values + $this->getValues();
+		$this->setValues($values);
+
+		if ($form['_forward']->isSubmittedBy()) {
+			return $this->getStep() + 1;
+		}
+
+		$this->clearCache();
+		$this->onFormSubmit($form, $values, $this);
+
+		if (!$this->hasThankYouPage()) {
+			return 0;
+		}
+
+		return $this->getLastStep();
+	}
+
+
+	/**
+	 * @param  UI\ITemplate  $template
+	 * @return void
+	 */
+	private function onBeforeRender(UI\ITemplate $template): void
+	{
+		$form = $this->getComponent('form', true);
 		$scheme = $this->getScheme();
 
-		if (isset($scheme[$name])) {
-			$section->setScheme($scheme[$name]);
+		switch ($name = $this->getSection()) {
+			case 'thankYou':
+				$class = $scheme[$name]['class'] ?? Sections\Page::class;
+				$section = $this->addThankYouPage(Sections\ThankYouPage::class);
+				$section->setScheme($scheme[$name] ?? []);
+
+				$template->setFile(__DIR__.'/templates/renderer-thankyou.latte');
+				break;
+
+			default:
+				$class = $scheme['sections'][$name]['class'] ?? Sections\Page::class;
+				$section = $this->addSection($name, $class);
+				$section->setScheme($scheme['sections'][$name] ?? []);
+
+				$container = $form->addContainer($section->getName());
+				break;
 		}
 
-		$fields = $section->getComponents(FALSE, InputProvider::class);
-		$page = $form->addContainer($section->getName());
-
-		foreach ($fields as $field) {
-			$field->createInput($page);
+		foreach ($section->getInputs() as $field) {
+			$field->createInput($container);
 		}
 
-		return $section;
+		$form->setValues($this->getValues());
+		$template->add('section', $section);
 	}
 
 
-	private function clearSections()
-	{
-		$components = $this->getComponents();
-
-		foreach ($components as $component) {
-			$this->removeComponent($component);
-		}
-	}
-
-
-	private function clearCache()
+	/**
+	 * @return void
+	 */
+	private function clearCache(): void
 	{
 		$this->setValues([]);
 		$this->setStep(0);

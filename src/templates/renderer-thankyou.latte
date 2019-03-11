@@ -1,0 +1,34 @@
+<section n:snippet="section" n:if="isset($section)">
+
+	<div n:class="!$architect->isColor('clear') ? panel, ajax, $layoutClass, $colorClass">
+
+		<div class="panel-heading" n:ifcontent n:tag-if="!$architect->isColor('clear')">
+			<h3 class="panel-title" n:ifcontent>{$architect->getHeaderFormatted()}</h3>
+		</div>
+
+		<div class="panel-body">
+
+			<div class="alert alert-{$flash->type}" n:foreach="$flashes as $flash">
+				{('form-architect.flash.'.$flash->message)|translate|noescape}
+			</div>
+
+            <p n:ifcontent>{$section->getDescription()|noescape}</p>
+
+            <div class="btn-toolbar">
+                <a href="{$redirect}" class="btn btn-primary" n:if="$redirect = $section->getRedirect()">{_form-architect.renderer.redirect|noescape}</a>
+                <a n:href="firstStep!" class="btn btn-default ajax">{_form-architect.renderer.next|noescape}</a>
+            </div>
+
+		</div>
+
+		<div class="panel-footer" n:ifcontent n:tag-if="!$architect->isColor('clear')">
+			<p n:class="help-block, !$architect->isColor('clear') ? no-margin">{$architect->getFooterFormatted()}</p>
+		</div>
+
+		<div class="fa-overlay invisible">
+			<i class="fas fa-sync-alt fa-spin"></i>
+		</div>
+
+	</div>
+
+</section>

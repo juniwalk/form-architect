@@ -1,30 +1,59 @@
-{form scheme class => 'ajax'}
-<nav class="fd-section well well-sm">
+<div n:snippet="architect">
+<form n:name="scheme" class="ajax">
 
-	<button n:name="save" type="submit" class="btn btn-primary pull-right">
-		<i class="fa fa-save"></i>
-		{_'form-architect.designer.scheme-save'}
-	</button>
+	<nav class="well well-sm overlay-wrapper">
 
-	<a n:href="addSection!" class="btn btn-default ajax">
-		<i class="fa fa-file-o"></i>
-		{_'form-architect.designer.section-add'}
-	</a>
+		<div class="btn-toolbar">
+			<button n:name="save" type="submit" class="btn btn-primary">{_form-architect.designer.save|noescape}</button>
+			<div class="btn-group">
+				<a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{_form-architect.designer.settings|noescape}</a>
+				<ul class="dropdown-menu">
+					<li n:class="$architect->getColor() == $key ? active" n:foreach="$colors as $key => $color">
+						<a n:href="color! $key" class="ajax" n:if="$color">{('form-architect.settings.colors.'.$key)|translate|noescape}</a>
+					</li>
+					<li role="separator" class="divider"></li>
+					<li n:class="$architect->isLayout('vertical') ? active"><a n:href="layout! vertical" class="ajax">{_form-architect.settings.layouts.vertical|noescape}</a></li>
+					<li n:class="$architect->isLayout('horizontal') ? active"><a n:href="layout! horizontal" class="ajax">{_form-architect.settings.layouts.horizontal|noescape}</a></li>
+					<li n:class="$architect->isLayout('inline') ? active"><a n:href="layout! inline" class="ajax">{_form-architect.settings.layouts.inline|noescape}</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a n:href="startOver!" class="ajax">{_form-architect.settings.clear|noescape}</a></li>
+				</ul>
+			</div>
+			<a n:href="addSection!" class="btn btn-default ajax">{_form-architect.designer.section|noescape}</a>
+			<a n:href="addThankYouPage!" class="btn btn-default ajax">{_form-architect.designer.thankyou|noescape}</a>
+		</div>
 
-	<a n:href="startOver!" class="btn btn-danger ajax">
-		<i class="fa fa-trash-o"></i>
-		{_'form-architect.designer.scheme-clear'}
-	</a>
+		<div class="form-group no-margin">
+			<br><!-- spacer -->
+			<label n:name="header">{_form-architect.designer.title}</label>
+			<input n:name="header" type="text" class="form-control" data-autosave>
+		</div>
 
-	<div class="fd-overlay animate invisible">
-		<i class="fa fa-refresh fa-spin"></i>
-	</div>
+		<div class="form-group no-margin" n:if="$architect->isFooterAllowed()">
+			<br><!-- spacer -->
+			<label n:name="footer">{_form-architect.designer.footer}</label>
+			<input n:name="footer" type="text" class="form-control" data-autosave>
+		</div>
 
-</nav>
+		<div class="fa-overlay invisible">
+			<i class="fas fa-sync-alt fa-spin"></i>
+		</div>
 
-<section n:snippet="sections" n:inner-foreach="$control->getSections() as $section">
+	</nav>
 
-	{control $section}
+	<section n:snippet="sections" n:inner-foreach="$control->getSections() as $section">
 
-</section>
-{/form}
+		{control $section}
+
+	</section>
+
+	<section n:snippet="thankYou">
+	{if $thankYou = $architect->getThankYouPage()}
+
+		{control $thankYou}
+
+	{/if}
+	</section>
+
+</form>
+</div>

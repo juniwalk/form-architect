@@ -3,7 +3,7 @@ function form_architect_init()
 {
 	var descriptionOnChange = false;
 
-	$('textarea.fd-editor').summernote({
+	$('textarea.wysiwyg').summernote({
 		disableDragAndDrop: true,
 		dialogsFade: true,
 		toolbar: [
@@ -28,19 +28,6 @@ function form_architect_init()
 		}
 	});
 
-	$(document).click(function (e) {
-		$('.fd-field').removeClass('active');
-
-		var $target = $(e.target).closest('.fd-field');
-		var $handle = $(e.target).closest('.fd-toolbar.vertical');
-
-		if (!$target.length || $handle.length) {
-			return;
-		}
-
-		$target.addClass('active');
-	});
-
 	$('[data-autosave]').off('change').on('change', function(e) {
 		return $(this).closest('form').submit();
 	});
@@ -54,15 +41,15 @@ $(function () {
 		form_architect_init();
 	});
 
-	$.nette.ext('fd-spinner', {
+	$.nette.ext('fa-spinner', {
 		start: function (xhr, settings) {
 			this.spinner = setTimeout(function () {
-				$('.fd-overlay').removeClass('invisible');
+				$('.fa-overlay').removeClass('invisible');
 			}, 50)
 		},
 		complete: function (xhr, status, settings) {
 			clearTimeout(this.spinner);
-			$('.fd-overlay').addClass('invisible');
+			$('.fa-overlay').addClass('invisible');
 		}
 	});
 
