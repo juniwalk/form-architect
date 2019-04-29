@@ -56,6 +56,7 @@ abstract class AbstractArchitect extends Control implements Architect
 
 	/** @var string[] */
 	private $colors = [
+		'clear' => 'panel-clear',
 		'default' => 'panel-default',
 		'info' => 'panel-info',
 		'primary' => 'panel-primary',

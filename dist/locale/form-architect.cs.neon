@@ -5,75 +5,76 @@
 #
 
 flash:
-    submit-success: '<i class="fas fa-check fa-fw"></i> Data byla úspěšně odeslána.'
+	submit-success: '<i class="fas fa-check fa-fw"></i> Data byla úspěšně odeslána.'
 
 renderer:
-    back: '<i class="fas fa-fw fa-chevron-circle-left"></i> Zpět'
-    next: '<i class="fas fa-fw fa-chevron-circle-right"></i> Další'
-    submit: '<i class="fas fa-fw fa-paper-plane"></i> Odeslat'
-    redirect: '<i class="fas fa-fw fa-directions"></i> Pokračovat'
+	back: '<i class="fas fa-fw fa-chevron-circle-left"></i> Zpět'
+	next: '<i class="fas fa-fw fa-chevron-circle-right"></i> Další'
+	submit: '<i class="fas fa-fw fa-paper-plane"></i> Odeslat'
+	redirect: '<i class="fas fa-fw fa-directions"></i> Pokračovat'
 
 designer:
-    save: '<i class="fas fa-fw fa-save"></i> <span class="hidden-xs">Uložit</span>'
-    settings: '<i class="fas fa-fw fa-cog"></i> <span class="sr-only">Nastavení</span>'
-    section: '<i class="fas fa-fw fa-file-medical"></i> <span class="hidden-xs">Sekce formuláře</span>'
-    thankyou: '<i class="fas fa-fw fa-file-medical-alt"></i> <span class="hidden-xs">Děkovná stránka</span>'
-    delete: '<i class="far fa-fw fa-trash-alt"></i> <span class="sr-only">Odstranit</span>'
-    title: 'Název formuláře'
-    footer: 'Patička formuláře'
+	save: '<i class="fas fa-fw fa-save"></i> <span class="hidden-xs">Uložit</span>'
+	settings: '<i class="fas fa-fw fa-cog"></i> <span class="sr-only">Nastavení</span>'
+	section: '<i class="fas fa-fw fa-file-medical"></i> <span class="hidden-xs">Sekce formuláře</span>'
+	thankyou: '<i class="fas fa-fw fa-file-medical-alt"></i> <span class="hidden-xs">Děkovná stránka</span>'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> <span class="sr-only">Odstranit</span>'
+	title: 'Název formuláře'
+	footer: 'Patička formuláře'
 
 settings:
-    move-up: '<i class="fas fa-chevron-up"></i> Posunout nahorů'
-    move-down: '<i class="fas fa-chevron-down"></i> Posunout dolů'
+	move-up: '<i class="fas fa-chevron-up"></i> Posunout nahorů'
+	move-down: '<i class="fas fa-chevron-down"></i> Posunout dolů'
 
-    required: '<i class="fas fa-fw fa-check-square"></i> Vyžadovat vyplnění'
-    label: '<i class="fas fa-fw fa-tag"></i> Zobrazit název'
+	required: '<i class="fas fa-fw fa-check-square"></i> Vyžadovat vyplnění'
+	label: '<i class="fas fa-fw fa-tag"></i> Zobrazit název'
 
-    colors:
-        default: '<i class="fas fa-fw fa-square text-muted"></i> Šedá'
-        info: '<i class="fas fa-fw fa-square text-info"></i> Světle modrá'
-        primary: '<i class="fas fa-fw fa-square text-primary"></i> Tmavě modrá'
-        success: '<i class="fas fa-fw fa-square text-success"></i> Zelená'
-        warning: '<i class="fas fa-fw fa-square text-warning"></i> Žlutá'
-        danger: '<i class="fas fa-fw fa-square text-danger"></i> Červená'
+	colors:
+		clear: '<i class="fas fa-fw fa-square"></i> Čistá'
+		default: '<i class="fas fa-fw fa-square text-muted"></i> Šedá'
+		info: '<i class="fas fa-fw fa-square text-info"></i> Světle modrá'
+		primary: '<i class="fas fa-fw fa-square text-primary"></i> Tmavě modrá'
+		success: '<i class="fas fa-fw fa-square text-success"></i> Zelená'
+		warning: '<i class="fas fa-fw fa-square text-warning"></i> Žlutá'
+		danger: '<i class="fas fa-fw fa-square text-danger"></i> Červená'
 
-    layouts:
-        vertical: '<i class="fas fa-fw fa-poll"></i> Standartní'
-        horizontal: '<i class="fas fa-fw fa-poll-h"></i> Kompaktní'
-        inline: '<i class="fas fa-fw fa-minus-square"></i> Do řádku'
+	layouts:
+		vertical: '<i class="fas fa-fw fa-poll"></i> Standartní'
+		horizontal: '<i class="fas fa-fw fa-poll-h"></i> Kompaktní'
+		inline: '<i class="fas fa-fw fa-minus-square"></i> Do řádku'
 
-    clone: '<i class="fas fa-fw fa-copy"></i> Zkopírovat'
-    merge: '<i class="fas fa-fw fa-compress"></i> Spojit'
-    delete: '<i class="far fa-fw fa-trash-alt"></i> Odstranit'
-    clear: '<i class="fas fa-fw fa-trash-alt"></i> Zahodit vše'
+	clone: '<i class="fas fa-fw fa-copy"></i> Zkopírovat'
+	merge: '<i class="fas fa-fw fa-compress"></i> Spojit'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> Odstranit'
+	clear: '<i class="fas fa-fw fa-trash-alt"></i> Zahodit vše'
 
 section:
-    question: '<i class="fas fa-fw fa-question"></i> <span class="hidden-xs">Přidat otázku</span>'
-    captcha: '<i class="fas fa-fw fa-shield-alt"></i> <span class="hidden-xs">Přidat captchu</span>'
-    description: '<i class="fas fa-fw fa-font"></i> <span class="hidden-xs">Přidat popis</span>'
+	question: '<i class="fas fa-fw fa-question"></i> <span class="hidden-xs">Přidat otázku</span>'
+	captcha: '<i class="fas fa-fw fa-shield-alt"></i> <span class="hidden-xs">Přidat captchu</span>'
+	description: '<i class="fas fa-fw fa-font"></i> <span class="hidden-xs">Přidat popis</span>'
 
 thankyou:
-    redirect: 'Odkaz pro přesměrování'
-    description: 'Obsah k zobrazení'
+	redirect: 'Odkaz pro přesměrování'
+	description: 'Obsah k zobrazení'
 
 field:
-    title: 'Otázka a typ odpovědi'
-    description: 'Popis'
-    captcha: 'Captcha'
+	title: 'Otázka a typ odpovědi'
+	description: 'Popis'
+	captcha: 'Captcha'
 
-    types:
-        text: '<i class="fas fa-font fa-fw"></i> Text'
-        email: '<i class="fas fa-envelope-open fa-fw"></i> Email'
-        url: '<i class="fas fa-globe fa-fw"></i> Odkaz'
-        password: '<i class="fas fa-key fa-fw"></i> Heslo'
-        textarea: '<i class="fas fa-paragraph fa-fw"></i> TextArea'
-        radio: '<i class="fas fa-dot-circle fa-fw"></i> Radio'
-        checkbox: '<i class="fas fa-check-square fa-fw"></i> Checkbox'
-        select: '<i class="fas fa-chevron-circle-down fa-fw"></i> Select'
+	types:
+		text: '<i class="fas fa-font fa-fw"></i> Text'
+		email: '<i class="fas fa-envelope-open fa-fw"></i> Email'
+		url: '<i class="fas fa-globe fa-fw"></i> Odkaz'
+		password: '<i class="fas fa-key fa-fw"></i> Heslo'
+		textarea: '<i class="fas fa-paragraph fa-fw"></i> TextArea'
+		radio: '<i class="fas fa-dot-circle fa-fw"></i> Radio'
+		checkbox: '<i class="fas fa-check-square fa-fw"></i> Checkbox'
+		select: '<i class="fas fa-chevron-circle-down fa-fw"></i> Select'
 
 option:
-    title: 'Odpověď'
-    add: '<i class="fas fa-fw fa-plus"></i> Přidat odpověď'
-    delete: '<i class="fas fa-fw fa-times"></i> <span class="sr-only">Odebrat odpověď</span>'
-    multiple: 'Umožnit více odpovědí.'
-    inline: 'Odpovědi zobrazit do řádku.'
+	title: 'Odpověď'
+	add: '<i class="fas fa-fw fa-plus"></i> Přidat odpověď'
+	delete: '<i class="fas fa-fw fa-times"></i> <span class="sr-only">Odebrat odpověď</span>'
+	multiple: 'Umožnit více odpovědí.'
+	inline: 'Odpovědi zobrazit do řádku.'
