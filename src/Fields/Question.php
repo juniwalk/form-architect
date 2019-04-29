@@ -275,10 +275,7 @@ final class Question extends AbstractField implements InputProvider
 			default: throw new \Exception($this->type);
 		}
 
-			$input->setRequired(false);
-		if ($this->getValue('isRequired')) {
-			$input->setRequired(true);
-		}
+		$input->setRequired($this->getValue('isRequired'));
 
 		return $input;
 	}

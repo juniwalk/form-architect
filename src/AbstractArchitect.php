@@ -229,11 +229,21 @@ abstract class AbstractArchitect extends Control implements Architect
 	{
 		return $this->footer;
 	}
+
+
+	/**
+	 * @return Html|null
+	 */
 	public function getHeaderFormatted(): ?Html
 	{
 		$content = $this->applyVariables($this->header);
 		return Html::el()->setHtml($content);
 	}
+
+
+	/**
+	 * @return Html|null
+	 */
 	public function getFooterFormatted(): ?Html
 	{
 		$content = $this->applyVariables($this->footer);

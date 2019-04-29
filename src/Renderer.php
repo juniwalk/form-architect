@@ -13,6 +13,9 @@ use Nette\Utils\ArrayHash;
 
 final class Renderer extends AbstractArchitect
 {
+	/** @var bool */
+	private $isReadOnly = false;
+
 	/** @var string[] */
 	private $steps = [];
 
@@ -96,6 +99,25 @@ final class Renderer extends AbstractArchitect
 	public function getValues(): iterable
 	{
 		return (array) $this->getCache()->getValues();
+	}
+
+
+	/**
+	 * @param  bool  $readOnly
+	 * @return void
+	 */
+	public function setReadOnly(bool $readOnly): void
+	{
+		$this->isReadOnly = $readOnly;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function isReadOnly(): bool
+	{
+		return $this->isReadOnly;
 	}
 
 
@@ -325,7 +347,11 @@ final class Renderer extends AbstractArchitect
 		}
 
 		foreach ($section->getInputs() as $field) {
-			$field->createInput($container);
+			$input = $field->createInput($container);
+
+			if ($this->isReadOnly) {
+				$input->setDisabled();
+			}
 		}
 
 		$form->setValues($this->getValues());
