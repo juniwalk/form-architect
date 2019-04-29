@@ -244,6 +244,7 @@ final class Renderer extends AbstractArchitect
 	protected function startup(): void
 	{
 		$this->onBeforeRender[] = function(self $self, UI\ITemplate $template) {
+			$template->add('readOnly', $this->isReadOnly);
 			$this->onBeforeRender($template);
 		};
 
@@ -270,6 +271,11 @@ final class Renderer extends AbstractArchitect
 	{
 		$form = new UI\Form;
 		$form->setTranslator($this->getTranslator());
+
+		if ($this->isReadOnly) {
+			return $form;
+		}
+
 		$form->addSubmit('_back')->setValidationScope(false);
 		$form->addSubmit('_forward');
 		$form->addSubmit('_submit');

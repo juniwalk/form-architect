@@ -24,7 +24,7 @@
 			{/foreach}
 			{/formContainer}
 
-			<div class="form-group no-margin-bottom">
+			<div class="form-group no-margin-bottom" n:if="!$readOnly">
 				<label n:class="control-label, $architect->isLayout('horizontal') ? col-sm-3"></label>
 				<div class="col-sm-9" n:tag-if="$architect->isLayout('horizontal')">
 				<div class="btn-toolbar">
