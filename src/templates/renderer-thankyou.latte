@@ -6,7 +6,7 @@
 			<h3 class="panel-title" n:ifcontent>{$architect->getHeaderFormatted()}</h3>
 		</div>
 
-		<div class="panel-body">
+		<div class="panel-body" n:tag-if="!$architect->isColor('clear')">
 
 			<div class="alert alert-{$flash->type}" n:foreach="$flashes as $flash">
 				{('form-architect.flash.'.$flash->message)|translate|noescape}
