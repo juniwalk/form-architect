@@ -8,8 +8,6 @@
 namespace JuniWalk\FormArchitect;
 
 use Nette\Application\UI;
-use Nette\Forms\Container;
-use Nette\Utils\ArrayHash;
 
 final class Renderer extends AbstractArchitect
 {

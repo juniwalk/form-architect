@@ -8,7 +8,6 @@
 namespace JuniWalk\FormArchitect;
 
 use JuniWalk\FormArchitect\Caches\Cache;
-use Nette\Http\Session;
 use Nette\Localization\ITranslator;
 
 class ArchitectFactory

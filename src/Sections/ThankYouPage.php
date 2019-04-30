@@ -8,8 +8,6 @@
 namespace JuniWalk\FormArchitect\Sections;
 
 use JuniWalk\FormArchitect\Architect;
-use JuniWalk\FormArchitect\Control;
-use JuniWalk\FormArchitect\Fields;
 use Nette\Forms\Container as Form;
 
 final class ThankYouPage extends AbstractSection

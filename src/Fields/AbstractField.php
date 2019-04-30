@@ -8,9 +8,7 @@
 namespace JuniWalk\FormArchitect\Fields;
 
 use JuniWalk\FormArchitect\Control;
-use JuniWalk\FormArchitect\Designer;
 use JuniWalk\FormArchitect\Helpers\Move;
-use Nette\Forms\Container;
 
 abstract class AbstractField extends Control implements Field
 {

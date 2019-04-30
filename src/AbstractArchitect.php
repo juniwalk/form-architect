@@ -10,11 +10,8 @@ namespace JuniWalk\FormArchitect;
 use JuniWalk\FormArchitect\Caches\Cache;
 use Nette\Application\UI;
 use Nette\ComponentModel\IComponent;
-use Nette\ComponentModel\IContainer;
 use Nette\InvalidStateException;
 use Nette\Forms\Container;
-use Nette\Http\Session;
-use Nette\Http\SessionSection;
 use Nette\Neon\Neon;
 use Nette\Utils\Html;
 
