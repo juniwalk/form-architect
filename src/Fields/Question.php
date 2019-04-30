@@ -288,6 +288,7 @@ final class Question extends AbstractField implements InputProvider
 	{
 		$form = $this->getForm();
 		$form->addText('title');
+		$form->addText('name');
 
 		if (!$this->isChoiceControl() || $this->isSelect()) {
 			$form->addText('description');

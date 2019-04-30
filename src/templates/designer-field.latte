@@ -42,9 +42,22 @@
 		</div>
 	</div>
 
-	<div class="form-group" n:if="!$control->isChoiceControl() || $control->isSelect()">
-		<label n:name="description">{_form-architect.field.description}</label>
-		<input n:name="description" type="text" class="form-control input-sm" data-autosave>
+	<div class="row" n:if="!$control->isChoiceControl() || $control->isSelect()">
+
+		<div class="col-sm-4">
+			<div class="form-group">
+				<label n:name="name">{_form-architect.field.name}</label>
+				<input n:name="name" type="text" class="form-control input-sm" data-autosave>
+			</div>
+		</div>
+
+		<div class="col-sm-8">
+			<div class="form-group">
+				<label n:name="description">{_form-architect.field.description}</label>
+				<input n:name="description" type="text" class="form-control input-sm" data-autosave>
+			</div>
+		</div>
+
 	</div>
 
 	<div class="form-group well well-sm" n:if="$control->isChoiceControl()">
