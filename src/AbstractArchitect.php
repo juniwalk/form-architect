@@ -72,7 +72,10 @@ abstract class AbstractArchitect extends Control implements Architect
 	public $onSchemeChange = [];
 
 	/** @var callable[] */
-	public $onSchemeSave = [];
+	public $onSchemeAutosave = [];
+
+	/** @var callable[] */
+	public $onSchemeSubmit = [];
 
 
 	/**
@@ -550,11 +553,12 @@ abstract class AbstractArchitect extends Control implements Architect
 		$form->addSubmit('save');
 
 		$form->onSuccess[] = function($form) {
-			if ($form['autosave']->isSubmittedBy() && !$this->hasAutosave) {
+			if ($form['autosave']->isSubmittedBy()) {
+				$this->onSchemeAutosave($this);
 				return;
 			}
 
-			$this->onSchemeSave($this);
+			$this->onSchemeSubmit($this);
 		};
 
 		return $form;
