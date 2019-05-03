@@ -29,7 +29,9 @@ function form_architect_init()
 	});
 
 	$('[data-autosave]').off('change').on('change', function(e) {
-		return $(this).closest('form').submit();
+		return $(this).closest('form')
+			.find("[name=autosave]")
+			.trigger("click");
 	});
 }
 

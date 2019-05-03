@@ -41,6 +41,9 @@ abstract class AbstractArchitect extends Control implements Architect
 	/** @var string */
 	private $color = 'default';
 
+	/** @var bool */
+	private $hasAutosave = true;
+
 	/** @var string[] */
 	private $variables = [];
 
@@ -96,7 +99,6 @@ abstract class AbstractArchitect extends Control implements Architect
 
 		$this->setScheme($this->getScheme());
 		$this->onSchemeChange();
-		$this->redrawControl('architect');
 	}
 
 
@@ -111,7 +113,25 @@ abstract class AbstractArchitect extends Control implements Architect
 
 		$this->setScheme($this->getScheme());
 		$this->onSchemeChange();
-		$this->redrawControl('architect');
+	}
+
+
+	/**
+	 * @param  bool  $autosave
+	 * @return void
+	 */
+	public function setAutosave(bool $autosave): void
+	{
+		$this->hasAutosave = $autosave;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function hasAutosave(): bool
+	{
+		return $this->hasAutosave;
 	}
 
 
@@ -416,6 +436,7 @@ abstract class AbstractArchitect extends Control implements Architect
 		$template->add('layoutClass', $this->layouts[$this->layout]);
 		$template->add('colors', $this->colors);
 		$template->add('colorClass', $this->colors[$this->color]);
+		$template->add('hasAutosave', $this->hasAutosave);
 
 		$this->onBeforeRender($this, $template);
 
@@ -524,9 +545,15 @@ abstract class AbstractArchitect extends Control implements Architect
 
 		$form->addText('header');
 		$form->addText('footer');
+
+		$form->addSubmit('autosave');
 		$form->addSubmit('save');
 
-		$form->onSuccess[] = function () {
+		$form->onSuccess[] = function($form) {
+			if ($form['autosave']->isSubmittedBy() && !$this->hasAutosave) {
+				return;
+			}
+
 			$this->onSchemeSave($this);
 		};
 

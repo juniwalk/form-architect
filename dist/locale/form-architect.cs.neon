@@ -58,6 +58,7 @@ thankyou:
 	description: 'Obsah k zobrazení'
 
 field:
+	name: 'Jméno prvku'
 	title: 'Otázka a typ odpovědi'
 	description: 'Popis'
 	captcha: 'Captcha'

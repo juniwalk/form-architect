@@ -5,6 +5,7 @@
 
 		<div class="btn-toolbar">
 			<button n:name="save" type="submit" class="btn btn-primary">{_form-architect.designer.save|noescape}</button>
+			<button n:name="autosave" type="submit" class="hidden" n:if="$hasAutosave"></button>
 			<div class="btn-group">
 				<a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{_form-architect.designer.settings|noescape}</a>
 				<ul class="dropdown-menu">

@@ -156,8 +156,6 @@ abstract class AbstractField extends Control implements Field
 
 		$scheme['name'] = $scheme['name'] ?? $this->getName();
 
-		bdump($scheme);
-
 		return $scheme;
 	}
 

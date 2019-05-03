@@ -244,8 +244,8 @@ final class Question extends AbstractField implements InputProvider
 				break;
 
 			case 'email':
-				$input = $form->addText($name)
-					->addRule(\Nette\Forms\Form::EMAIL, 'nette.user.email-invalid');
+				$input = $form->addText($name);
+					//->addRule(\Nette\Forms\Form::EMAIL, 'nette.user.email-invalid');
 				break;
 
 			case 'textarea':
@@ -287,12 +287,9 @@ final class Question extends AbstractField implements InputProvider
 	protected function createSchemeField(): void
 	{
 		$form = $this->getForm();
-		$form->addText('title');
 		$form->addText('name');
-
-		if (!$this->isChoiceControl() || $this->isSelect()) {
-			$form->addText('description');
-		}
+		$form->addText('title');
+		$form->addText('description');
 
 		if (!$this->isChoiceControl()) {
 			return;

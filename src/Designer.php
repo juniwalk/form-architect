@@ -103,12 +103,9 @@ final class Designer extends AbstractArchitect
 		};
 
 		$this->onSchemeSave[] = function() {
-			$this->isControlInvalid() || $this->redrawControl('empty');
 			$this->schemeSave();
-
-			if (!$this->getPresenter()->isAjax()) {
-				$this->redirect('this');
-			}
+			$this->schemeLoad();
+			$this->redrawControl('architect');
 		};
 	}
 

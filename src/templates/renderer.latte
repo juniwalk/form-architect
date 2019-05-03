@@ -68,35 +68,30 @@
 		<div class="col-sm-9" n:tag-if="$architect->isLayout('horizontal')">
 			{include #'question-'.$field->getValue('type')
 				field => $field,
-				form => $form,
-				description => $field->getValue('description')
+				form => $form
 			}
+			<p class="help-block" n:ifcontent>{$field->getValue('description')}</p>
 		</div>
 	</div>
 
 	{define question-text}
 		<input type="text" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
-		<p class="help-block" n:ifcontent>{$description}</p>
 	{/define}
 
 	{define question-email}
 		<input type="email" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
-		<p class="help-block" n:ifcontent>{$description}</p>
 	{/define}
 
 	{define question-textarea}
 		<textarea class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')"></textarea>
-		<p class="help-block" n:ifcontent>{$description}</p>
 	{/define}
 
 	{define question-password}
 		<input type="password" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
-		<p class="help-block" n:ifcontent>{$description}</p>
 	{/define}
 
 	{define question-select}
 		<select type="text" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')"></select>
-		<p class="help-block" n:ifcontent>{$description}</p>
 	{/define}
 
 	{define question-checkbox}
