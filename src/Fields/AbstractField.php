@@ -150,10 +150,13 @@ abstract class AbstractField extends Control implements Field
 	{
 		$scheme = array_merge(
 			['class' => static::class],
-			['name' => $this->getName()],
 			['hasLabel' => $this->hasLabel],
 			$this->getForm()->getValues(true)
 		);
+
+		$scheme['name'] = $scheme['name'] ?? $this->getName();
+
+		bdump($scheme);
 
 		return $scheme;
 	}

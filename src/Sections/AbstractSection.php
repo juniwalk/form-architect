@@ -253,7 +253,10 @@ abstract class AbstractSection extends Control implements Section
 		$scheme = ['class' => static::class];
 
 		foreach ($this->getFields() as $key => $field) {
-			$scheme['fields'][$key] = $field->getScheme();
+			$values = $field->getScheme();
+			$name = $values['name'] ?? $key;
+
+			$scheme['fields'][$name] = $values;
 		}
 
 		return $scheme;
@@ -272,6 +275,9 @@ abstract class AbstractSection extends Control implements Section
 
 		foreach ($scheme['fields'] ?? [] as $key => $values) {
 			$field = $this->getComponent($key, false) ?? $this->addField($key, $values['class']);
+
+			$values['name'] = $field->getName();
+
 			$field->setScheme($values);
 		}
 	}
