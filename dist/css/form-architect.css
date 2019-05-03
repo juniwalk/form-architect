@@ -9,7 +9,7 @@
 /**
  * General
  */
-section#snippet-designer-sections hr { border-color: #999; }
+section#snippet-designer-sections hr { border-color: #999; margin: 15px -15px; }
 
 .panel .panel-body .form-group:last-child { margin-bottom: 0px; }
 
