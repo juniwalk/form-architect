@@ -416,17 +416,6 @@ abstract class AbstractArchitect extends Control implements Architect
 
 
 	/**
-	 * @param  string  $prefix
-	 * @param  int  $length
-	 * @return string
-	 */
-	public function createName(string $prefix, int $length = 15): string
-	{
-		return substr($prefix.sha1(uniqid('', true)), 0, $length);
-	}
-
-
-	/**
 	 * @return void
 	 */
 	public function render(): void

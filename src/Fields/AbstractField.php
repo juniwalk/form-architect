@@ -154,8 +154,6 @@ abstract class AbstractField extends Control implements Field
 			$this->getForm()->getValues(true)
 		);
 
-		$scheme['name'] = $scheme['name'] ?? $this->getName();
-
 		return $scheme;
 	}
 

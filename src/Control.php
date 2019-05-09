@@ -10,6 +10,7 @@ namespace JuniWalk\FormArchitect;
 use Nette\Application\UI;
 use Nette\Forms\Container as Form;
 use Nette\Localization\ITranslator;
+use Nette\Utils\Random;
 
 abstract class Control extends UI\Control
 {
@@ -90,4 +91,16 @@ abstract class Control extends UI\Control
 	 * @return void
 	 */
 	abstract public function setScheme(iterable $scheme = []): void;
+
+
+	/**
+	 * @param  string  $prefix
+	 * @param  int  $length
+	 * @return string
+	 */
+	public function createName(string $prefix, int $length = 12): string
+	{
+		$random = Random::generate($length);
+		return substr($prefix.$random, 0, $length);
+	}
 }

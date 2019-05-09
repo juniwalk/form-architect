@@ -42,21 +42,27 @@
 		</div>
 	</div>
 
-	<div class="form-group well well-sm" n:if="$control->isChoiceControl()" style="margin-bottom: 15px;">
+	<div class="form-group">
+		<label n:name="description">{_form-architect.field.description}</label>
+		<input n:name="description" type="text" class="form-control input-sm" data-autosave>
+	</div>
+
+	<div class="form-group well well-sm" n:if="$control->isChoiceControl()">
 
 		{formContainer options}
 
 			{foreach $formContainer->getComponents() as $option}
 			{formContainer $option}
 
-			<div class="form-group">
-			<div class="input-group input-group-sm">
-				<input n:name="option" type="text" class="form-control" placeholder="{_form-architect.option.title}" data-autosave>
-				<span class="input-group-btn">
-					<a n:href="deleteOption! $option->getName()" class="btn btn-danger ajax">{_form-architect.option.delete|noescape}</a>
-				</span>
-			</div>
-			</div>
+				<div class="form-group">
+					<div class="input-group input-group-sm">
+						<input n:name="option" type="text" class="form-control" placeholder="{_form-architect.option.title}" data-autosave>
+						<input n:name="key" type="hidden" class="hidden" data-autosave>
+						<span class="input-group-btn">
+							<a n:href="deleteOption! $option->getName()" class="btn btn-danger ajax">{_form-architect.option.delete|noescape}</a>
+						</span>
+					</div>
+				</div>
 
 			{/formContainer}
 			{/foreach}
@@ -77,24 +83,6 @@
 				<input n:name="inline" type="checkbox" data-autosave>
 				{_form-architect.option.inline}
 			</label>
-		</div>
-
-	</div>
-
-	<div class="row">
-
-		<div class="col-sm-8">
-			<div class="form-group">
-				<label n:name="description">{_form-architect.field.description}</label>
-				<input n:name="description" type="text" class="form-control input-sm" data-autosave>
-			</div>
-		</div>
-
-		<div class="col-sm-4">
-			<div class="form-group">
-				<label n:name="name">{_form-architect.field.name}</label>
-				<input n:name="name" type="text" class="form-control input-sm" data-autosave>
-			</div>
 		</div>
 
 	</div>

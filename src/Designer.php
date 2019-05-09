@@ -94,8 +94,6 @@ final class Designer extends AbstractArchitect
 	 */
 	protected function startup(): void
 	{
-		$this->schemeLoad();
-
 		$this->onSchemeChange[] = function() {
 			$this->redrawControl('sections');
 			$this->redrawControl('thankYou');
@@ -111,27 +109,8 @@ final class Designer extends AbstractArchitect
 		};
 
 		$this->onSchemeSubmit[] = function() {
-			$this->schemeSave();
-			$this->schemeLoad();
+			$this->setScheme($this->getScheme());
 			$this->redrawControl('architect');
 		};
-	}
-
-
-	/**
-	 * @return void
-	 */
-	private function schemeLoad(): void
-	{
-		$this->setScheme($this->getCache()->getScheme());
-	}
-
-
-	/**
-	 * @return void
-	 */
-	private function schemeSave(): void
-	{
-		$this->getCache()->setScheme($this->getScheme());
 	}
 }

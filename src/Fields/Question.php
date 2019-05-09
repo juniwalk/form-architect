@@ -65,8 +65,10 @@ final class Question extends AbstractField implements InputProvider
 	 */
 	public function handleAddOption(): void
 	{
+		$name = $this->createName('option');
+
 		$scheme = $this->getScheme();
-		$scheme['options'][] = ['option' => null];
+		$scheme['options'][$name] = null;
 
 		$this->setScheme($scheme);
 		$this->getArchitect()->onSchemeChange();
@@ -78,12 +80,12 @@ final class Question extends AbstractField implements InputProvider
 	 * @return void
 	 * @throws Exception
 	 */
-	public function handleDeleteOption(int $index): void
+	public function handleDeleteOption(string $index): void
 	{
 		$scheme = $this->getScheme();
 
-		unset($scheme['options'][$index]);
-		$scheme['options'] = array_values($scheme['options']);
+		$key = array_keys($scheme['options'])[$index];
+		unset($scheme['options'][$key]);
 
 		$this->setScheme($scheme);
 		$this->getArchitect()->onSchemeChange();
@@ -131,6 +133,17 @@ final class Question extends AbstractField implements InputProvider
 		$scheme = $scheme + ['isRequired' => $this->isRequired];
 		$scheme = $scheme + ['type' => $this->type];
 
+		if ($options = $scheme['options'] ?? []) {
+			foreach ($options as $key => $value) {
+				$name = $value['key'] ?: $this->createName('option');
+
+				$options[$name] = $value['option'];
+				unset($options[$key]);
+			}
+			
+			$scheme['options'] = $options;
+		}
+
 		return $scheme;
 	}
 
@@ -147,6 +160,17 @@ final class Question extends AbstractField implements InputProvider
 
 		if (isset($scheme['isRequired'])) {
 			$this->setRequired($scheme['isRequired']);
+		}
+
+		if ($options = $scheme['options'] ?? []) {
+			$scheme['options'] = [];
+
+			foreach ($options as $key => $value) {
+				$scheme['options'][] = [
+					'key' => $key,
+					'option' => $value,
+				];
+			}
 		}
 
 		parent::setScheme($scheme);
@@ -287,7 +311,6 @@ final class Question extends AbstractField implements InputProvider
 	protected function createSchemeField(): void
 	{
 		$form = $this->getForm();
-		$form->addText('name');
 		$form->addText('title');
 		$form->addText('description');
 
@@ -314,6 +337,7 @@ final class Question extends AbstractField implements InputProvider
 		for ($i = 0; $i < $optionsCount; $i++) {
 			$option = $options->addContainer($i);
 			$option->addText('option');
+			$option->addText('key');
 		}
 	}
 }

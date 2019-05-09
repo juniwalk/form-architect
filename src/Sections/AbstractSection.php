@@ -180,15 +180,14 @@ abstract class AbstractSection extends Control implements Section
 	 */
 	public function addField(?string $name, ?string $class): Fields\Field
 	{
-		$architect = $this->getArchitect();
-		$name = $name ?: $architect->createName('field');
+		$name = $name ?: $this->createName('field');
 		$form = $this->getForm()->addContainer($name);
 
 		if (is_null($class)) {
 			throw new \Exception;
 		}
 
-		$this->addComponent($field = new $class($architect, $form), $name);
+		$this->addComponent($field = new $class($this->getArchitect(), $form), $name);
 		return $field;
 	}
 
@@ -275,9 +274,6 @@ abstract class AbstractSection extends Control implements Section
 
 		foreach ($scheme['fields'] ?? [] as $key => $values) {
 			$field = $this->getComponent($key, false) ?? $this->addField($key, $values['class']);
-
-			$values['name'] = $field->getName();
-
 			$field->setScheme($values);
 		}
 	}
