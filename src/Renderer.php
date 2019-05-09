@@ -215,6 +215,32 @@ final class Renderer extends AbstractArchitect
 
 
 	/**
+	 * @param  string  $type
+	 * @param  string[]  $values
+	 * @return string|null
+	 */
+	public function findValueByType(string $type, iterable $values): ?string
+	{
+		$scheme = $this->getScheme();
+		$path = [];
+
+		foreach ($scheme['sections'] as $sectionName => $section) {
+			foreach ($section['fields'] as $fieldName => $field) {
+				$fieldType = $field['type'] ?? null;
+
+				if (!$fieldType || $fieldType !== $type) {
+					continue;
+				}
+
+				return $values[$sectionName][$fieldName];
+			}
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * @return string
 	 */
 	public function getDefaultTemplateFile(): string
