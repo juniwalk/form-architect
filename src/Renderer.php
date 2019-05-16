@@ -7,6 +7,7 @@
 
 namespace JuniWalk\FormArchitect;
 
+use JuniWalk\FormArchitect\Fields\Captcha;
 use Nette\Application\UI;
 
 final class Renderer extends AbstractArchitect
@@ -377,9 +378,13 @@ final class Renderer extends AbstractArchitect
 		}
 
 		foreach ($section->getInputs() as $field) {
+			if ($this->isReadOnly && $field instanceof Captcha) {
+				continue;
+			}
+
 			$input = $field->createInput($container);
 
-			if ($this->isReadOnly) {
+			if ($input && $this->isReadOnly) {
 				$input->setDisabled();
 			}
 		}
