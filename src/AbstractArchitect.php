@@ -27,6 +27,9 @@ abstract class AbstractArchitect extends Control implements Architect
 	private $templateFile;
 
 	/** @var string */
+	private $icon = 'fab fa-wpforms';
+
+	/** @var string */
 	private $header;
 
 	/** @var string */
@@ -211,6 +214,25 @@ abstract class AbstractArchitect extends Control implements Architect
 	 * @return string
 	 */
 	abstract public function getDefaultTemplateFile(): string;
+
+
+	/**
+	 * @param  string  $icon
+	 * @return void
+	 */
+	public function setIcon(string $icon): void
+	{
+		$this->icon = $icon;
+	}
+
+
+	/**
+	 * @return string|null
+	 */
+	public function getIcon(): ?string
+	{
+		return $this->icon;
+	}
 
 
 	/**
@@ -444,6 +466,7 @@ abstract class AbstractArchitect extends Control implements Architect
 		$values = $this->getForm()->getValues(true);
 
 		$scheme = [];
+		$scheme['icon'] = $values['icon'] ?? null;
 		$scheme['header'] = $values['header'] ?? null;
 		$scheme['footer'] = $values['footer'] ?? null;
 		$scheme = $scheme + ['layout' => $this->layout];
@@ -459,6 +482,7 @@ abstract class AbstractArchitect extends Control implements Architect
 	 */
 	public function setScheme(iterable $scheme = []): void
 	{
+		$this->icon = $scheme['icon'] ?? $this->icon ?? null;
 		$this->header = $scheme['header'] ?? $this->header ?? null;
 		$this->footer = $scheme['footer'] ?? $this->footer ?? null;
 
@@ -471,6 +495,7 @@ abstract class AbstractArchitect extends Control implements Architect
 		}
 
 		$this->getForm()->setValues([
+			'icon' => $this->icon,
 			'header' => $this->header,
 			'footer' => $this->footer,
 		]);
@@ -535,6 +560,7 @@ abstract class AbstractArchitect extends Control implements Architect
 		$form = new UI\Form;
 		$form->setTranslator($this->getTranslator());
 
+		$form->addText('icon');
 		$form->addText('header');
 		$form->addText('footer');
 

@@ -3,6 +3,16 @@ function form_architect_init()
 {
 	var descriptionOnChange = false;
 
+	$('.icp-auto').iconpicker({
+		placement: 'bottomLeft',
+		hideOnSelect: true
+	});
+
+	$('.icp-auto').on('iconpickerSelected', function(event){
+		$(this).change();
+	});
+
+
 	$('textarea.wysiwyg').summernote({
 		disableDragAndDrop: true,
 		dialogsFade: true,
