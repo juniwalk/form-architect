@@ -23,7 +23,7 @@ final class Question extends AbstractField implements InputProvider
 		'text',
 		'email',
 		'url',
-		'password',
+		//'password',
 		'textarea',
 		null, // Separator
 		'radio',
@@ -262,10 +262,10 @@ final class Question extends AbstractField implements InputProvider
 				$input = $form->addText($name);
 				break;
 
-			case 'password':
-				$input = $form->addText($name)
-					->addRule(\Nette\Forms\Form::MIN_LENGTH, 'nette.user.password-length', 6);
-				break;
+			//case 'password':
+			//	$input = $form->addText($name)
+			//		->addRule(\Nette\Forms\Form::MIN_LENGTH, 'nette.user.password-length', 6);
+			//	break;
 
 			case 'email':
 				$input = $form->addText($name);
