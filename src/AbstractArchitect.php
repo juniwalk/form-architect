@@ -279,7 +279,14 @@ abstract class AbstractArchitect extends Control implements Architect
 	public function getHeaderFormatted(): ?Html
 	{
 		$content = $this->applyVariables($this->header);
-		return Html::el()->setHtml($content);
+		$header = Html::el();
+
+		if ($icon = $this->getIcon()) {
+			$icon = Html::el('i class="fa-fw"')->addClass($icon);
+			$header->addHtml($icon)->addText(' ');
+		}
+
+		return $header->addHtml($content);
 	}
 
 
