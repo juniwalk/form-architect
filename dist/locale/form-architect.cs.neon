@@ -46,6 +46,7 @@ settings:
 	clone: '<i class="fas fa-fw fa-copy"></i> Zkopírovat'
 	merge: '<i class="fas fa-fw fa-compress"></i> Spojit'
 	delete: '<i class="far fa-fw fa-trash-alt"></i> Odstranit'
+	undo: '<i class="fas fa-fw fa-undo-alt"></i> Vrátit změny'
 	clear: '<i class="fas fa-fw fa-trash-alt"></i> Zahodit vše'
 
 section:

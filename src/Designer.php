@@ -35,7 +35,18 @@ final class Designer extends AbstractArchitect
 	public function handleStartOver(): void
 	{
 		$this->setScheme();
+		$this->clearCache();
 		$this->onSchemeChange();
+	}
+
+
+	/**
+	 * @return void
+	 */
+	public function handleClearCache(): void
+	{
+		$this->clearCache();
+		$this->redirect('this');
 	}
 
 
@@ -97,20 +108,34 @@ final class Designer extends AbstractArchitect
 		$this->onSchemeChange[] = function() {
 			$this->redrawControl('sections');
 			$this->redrawControl('thankYou');
-			$this->onSchemeSubmit($this);
+			$this->onSchemeAutosave($this);
 		};
 
 		$this->onSchemeAutosave[] = function() {
+			$scheme = $this->getScheme();
+
+			$this->setScheme($scheme);
+			$this->redrawControl('architect');
+
 			if (!$this->hasAutosave()) {
 				return;
 			}
 
-			$this->onSchemeSubmit($this);
+			$this->getCache()->setScheme($scheme);
 		};
 
 		$this->onSchemeSubmit[] = function() {
-			$this->setScheme($this->getScheme());
-			$this->redrawControl('architect');
+			$this->onSchemeAutosave($this);
+			$this->clearCache();
 		};
+	}
+
+
+	/**
+	 * @return void
+	 */
+	private function clearCache(): void
+	{
+		$this->getCache()->setScheme([]);
 	}
 }

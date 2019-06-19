@@ -17,6 +17,7 @@
 					<li n:class="$architect->isLayout('horizontal') ? active"><a n:href="layout! horizontal" class="ajax">{_form-architect.settings.layouts.horizontal|noescape}</a></li>
 					<li n:class="$architect->isLayout('inline') ? active"><a n:href="layout! inline" class="ajax">{_form-architect.settings.layouts.inline|noescape}</a></li>
 					<li role="separator" class="divider"></li>
+					<li><a n:href="clearCache!">{_form-architect.settings.undo|noescape}</a></li>
 					<li><a n:href="startOver!" class="ajax">{_form-architect.settings.clear|noescape}</a></li>
 				</ul>
 			</div>

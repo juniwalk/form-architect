@@ -510,6 +510,22 @@ abstract class AbstractArchitect extends Control implements Architect
 
 
 	/**
+	 * @param  string[]  $scheme
+	 * @return void
+	 */
+	public function setSchemeCached(iterable $scheme = []): void
+	{
+		$cache = $this->getCache();
+
+		if (!$cache->getScheme()) {
+			$cache->setScheme($scheme);
+		}
+
+		$this->setScheme($cache->getScheme());
+	}
+
+
+	/**
 	 * @return string
 	 */
 	public function getNeon(): string
@@ -531,7 +547,7 @@ abstract class AbstractArchitect extends Control implements Architect
 	/**
 	 * @return Cache
 	 */
-	protected function getCache(): Cache
+	public function getCache(): Cache
 	{
 		return $this->cache;
 	}
