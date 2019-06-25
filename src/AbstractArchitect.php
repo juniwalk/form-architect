@@ -511,13 +511,14 @@ abstract class AbstractArchitect extends Control implements Architect
 
 	/**
 	 * @param  string[]  $scheme
+	 * @param  bool  $force
 	 * @return void
 	 */
-	public function setSchemeCached(iterable $scheme = []): void
+	public function setSchemeCached(iterable $scheme = [], bool $force = false): void
 	{
 		$cache = $this->getCache();
 
-		if (!$cache->getScheme()) {
+		if ($force || !$cache->getScheme()) {
 			$cache->setScheme($scheme);
 		}
 

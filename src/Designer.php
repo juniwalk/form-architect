@@ -112,16 +112,12 @@ final class Designer extends AbstractArchitect
 		};
 
 		$this->onSchemeAutosave[] = function() {
-			$scheme = $this->getScheme();
+			$this->setSchemeCached(
+				$this->getScheme(),
+				$this->hasAutosave()
+			);
 
-			$this->setScheme($scheme);
 			$this->redrawControl('architect');
-
-			if (!$this->hasAutosave()) {
-				return;
-			}
-
-			$this->getCache()->setScheme($scheme);
 		};
 
 		$this->onSchemeSubmit[] = function() {
