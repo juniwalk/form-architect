@@ -78,16 +78,20 @@
 		<input type="text" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
 	{/define}
 
+	{define question-url}
+		<input type="url" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
+	{/define}
+
+	{*define question-password}
+		<input type="password" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
+	{/define*}
+
 	{define question-email}
 		<input type="email" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
 	{/define}
 
 	{define question-textarea}
 		<textarea class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')"></textarea>
-	{/define}
-
-	{define question-password}
-		<input type="password" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
 	{/define}
 
 	{define question-select}

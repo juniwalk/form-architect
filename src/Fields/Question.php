@@ -259,6 +259,7 @@ final class Question extends AbstractField implements InputProvider
 
 		switch ($this->type) {
 			case 'text':
+			case 'url':
 				$input = $form->addText($name);
 				break;
 
