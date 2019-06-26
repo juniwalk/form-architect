@@ -15,7 +15,15 @@ final class NetteCache implements Cache
     private $storage;
 
     /** @var Caching\Cache */
-    private $cache;
+	private $cache;
+
+	/** @var string[] */
+	private $meta = [
+		Caching\Cache::EXPIRE => '20 minutes',
+		Caching\Cache::SLIDING => true,
+		Caching\Cache::TAGS => ['form-architect'],
+		Caching\Cache::PRIORITY => 50,
+	];
 
 
     /**
@@ -44,7 +52,7 @@ final class NetteCache implements Cache
      */
     public function setValues(iterable $values): void
     {
-        $this->cache->save('values', $values);
+        $this->cache->save('values', $values, $this->meta);
     }
 
 
@@ -63,7 +71,7 @@ final class NetteCache implements Cache
      */
     public function setScheme(iterable $scheme): void
     {
-        $this->cache->save('scheme', $scheme);
+        $this->cache->save('scheme', $scheme, $this->meta);
     }
 
 
@@ -82,7 +90,7 @@ final class NetteCache implements Cache
      */
     public function setStep(int $step): void
     {
-        $this->cache->save('step', $step);
+        $this->cache->save('step', $step, $this->meta);
     }
 
 

@@ -22,6 +22,7 @@ final class FormArchitectExtension extends CompilerExtension
 	private $cacheDrivers = [
 		'default' => Caches\NetteCache::class,
 		'session' => Caches\SessionCache::class,
+		'nette' => Caches\NetteCache::class,
 	];
 
 
