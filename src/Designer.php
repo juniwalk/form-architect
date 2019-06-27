@@ -92,6 +92,32 @@ final class Designer extends AbstractArchitect
 
 
 	/**
+	 * @param  string  $type
+	 * @return Fields\Field|null
+	 */
+	public function findByType(string $type): ?Fields\Field
+	{
+		$scheme = $this->getScheme();
+
+		foreach ($scheme['sections'] as $sectionName => $section) {
+			$control = $this->getComponent($sectionName);
+
+			foreach ($section['fields'] as $fieldName => $field) {
+				$fieldType = $field['type'] ?? null;
+
+				if (!$fieldType || $fieldType !== $type) {
+					continue;
+				}
+
+				return $control->getComponent($fieldName);
+			}
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * @return string
 	 */
 	public function getDefaultTemplateFile(): string

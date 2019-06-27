@@ -1,6 +1,6 @@
 <section n:snippet="section" n:if="isset($section)">
 
-	<form n:name="form" n:class="!$architect->isColor('clear') ? panel, ajax, $layoutClass, $colorClass">
+	<form n:name="form" n:class="!$architect->isColor('clear') ? panel, $layoutClass, $colorClass">
 
 		<div class="panel-heading" n:ifcontent n:tag-if="!$architect->isColor('clear')">
 			<h3 class="panel-title" n:ifcontent>{$architect->getHeaderFormatted()}</h3>
@@ -29,7 +29,7 @@
 				<div class="col-sm-9" n:tag-if="$architect->isLayout('horizontal')">
 				<div class="btn-toolbar">
 
-					<button n:name="_forward" class="btn btn-default" type="submit" n:if="!$control->showSubmit() && $control->hasSteps()">
+					<button n:name="_forward" class="btn btn-default ajax" type="submit" n:if="!$control->showSubmit() && $control->hasSteps()">
 						{_form-architect.renderer.next|noescape}
 					</button>
 
@@ -37,7 +37,7 @@
 						{_form-architect.renderer.submit|noescape}
 					</button>
 
-					<button n:name="_back" class="btn btn-default" type="submit" n:if="!$control->isFirstStep() && $control->hasSteps()">
+					<button n:name="_back" class="btn btn-default ajax" type="submit" n:if="!$control->isFirstStep() && $control->hasSteps()">
 						{_form-architect.renderer.back|noescape}
 					</button>
 

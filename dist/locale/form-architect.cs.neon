@@ -19,6 +19,7 @@ designer:
 	section: '<i class="fas fa-fw fa-file-medical"></i> <span class="hidden-xs">Sekce formuláře</span>'
 	thankyou: '<i class="fas fa-fw fa-file-medical-alt"></i> <span class="hidden-xs">Děkovná stránka</span>'
 	delete: '<i class="far fa-fw fa-trash-alt"></i> <span class="sr-only">Odstranit</span>'
+	icon: 'Ikonka'
 	title: 'Název formuláře'
 	footer: 'Patička formuláře'
 
