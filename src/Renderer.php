@@ -304,7 +304,7 @@ final class Renderer extends AbstractArchitect
 		$form->addSubmit('_back')->setValidationScope(false);
 		$form->addSubmit('_forward');
 		$form->addSubmit('_submit');
-		$form->onSuccess[] = function (UI\Form $form) {
+		$form->onSuccess[] = function(UI\Form $form) {
 			$step = $this->onFormSuccess($form);
 			$this->setStep($step);
 		};
@@ -359,33 +359,29 @@ final class Renderer extends AbstractArchitect
 		$form = $this->getComponent('form', true);
 		$scheme = $this->getScheme();
 
-		switch ($name = $this->getSection()) {
-			case 'thankYou':
-				$class = $scheme[$name]['class'] ?? Sections\Page::class;
-				$section = $this->addThankYouPage(Sections\ThankYouPage::class);
-				$section->setScheme($scheme[$name] ?? []);
+		$step = $this->steps[$this->getStep()];
 
-				$template->setFile(__DIR__.'/templates/renderer-thankyou.latte');
-				break;
-
-			default:
-				$class = $scheme['sections'][$name]['class'] ?? Sections\Page::class;
-				$section = $this->addSection($name, $class);
-				$section->setScheme($scheme['sections'][$name] ?? []);
-
-				$container = $form->addContainer($section->getName());
-				break;
-		}
-
-		foreach ($section->getInputs() as $field) {
-			if ($this->isReadOnly && $field instanceof Captcha) {
+		foreach ($scheme['sections'] ?? [] as $name => $structure) {
+			if ($name == 'thankYou' || $name !== $step) {
 				continue;
 			}
 
-			$input = $field->createInput($container);
+			$class = $structure['class'] ?? Sections\Page::class;
+			$container = $form->addContainer($name);
 
-			if ($input && $this->isReadOnly) {
-				$input->setDisabled();
+			$section = $this->addSection($name, $class);
+			$section->setScheme($structure ?? []);
+
+			foreach ($section->getInputs() as $field) {
+				if ($this->isReadOnly && $field instanceof Captcha) {
+					continue;
+				}
+	
+				$input = $field->createInput($container);
+	
+				if ($input && $this->isReadOnly) {
+					$input->setDisabled();
+				}
 			}
 		}
 
