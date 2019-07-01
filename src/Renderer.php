@@ -169,7 +169,7 @@ final class Renderer extends AbstractArchitect
 	 */
 	public function hasSteps(): bool
 	{
-		return sizeof($this->steps) > 1;
+		return sizeof($this->steps) > 1 && !$this->isReadOnly;
 	}
 
 
@@ -339,6 +339,10 @@ final class Renderer extends AbstractArchitect
 			return $this->getStep() + 1;
 		}
 
+		if (isset($values['g-recaptcha-response'])) {
+			unset($values['g-recaptcha-response']);
+		}
+
 		$this->clearCache();
 		$this->onFormSubmit($form, $values, $this);
 
@@ -356,13 +360,53 @@ final class Renderer extends AbstractArchitect
 	 */
 	private function onBeforeRender(UI\ITemplate $template): void
 	{
-		$form = $this->getComponent('form', true);
 		$scheme = $this->getScheme();
+		$step = $this->getSection();
 
-		$step = $this->steps[$this->getStep()];
+		$sections = $step === 'thankYou'
+			? $this->createThankYouPage($scheme)
+			: $this->createSections($scheme, $step);
+
+		if ($step === 'thankYou') {
+			$template->setFile(__DIR__.'/templates/renderer-thankyou.latte');
+			$template->add('section', current($sections));
+		}
+
+		$form = $this->getComponent('form', true);
+		$form->setValues($this->getValues());
+
+		$template->add('sections', $sections);
+	}
+
+
+	/**
+	 * @param  string[]  $scheme
+	 * @return ThankYouPage[]
+	 */
+	private function createThankYouPage(iterable $scheme): iterable
+	{
+		$sections = [];
+
+		$section = $this->addThankYouPage(Sections\ThankYouPage::class);
+		$section->setScheme($scheme['thankYou'] ?? []);
+		$sections['thankYou'] = $section;
+
+		return $sections;
+	}
+
+
+	/**
+	 * @param  string[]  $scheme
+	 * @param  string|null  $step
+	 * @return Section[]
+	 */
+	private function createSections(iterable $scheme, ?string $step): iterable
+	{
+		$form = $this->getComponent('form', true);
+		$sections = [];
 
 		foreach ($scheme['sections'] ?? [] as $name => $structure) {
-			if ($name == 'thankYou' || $name !== $step) {
+			if (!$this->isReadOnly && $name !== $step) {
 				continue;
 			}
 
@@ -383,10 +427,11 @@ final class Renderer extends AbstractArchitect
 					$input->setDisabled();
 				}
 			}
-		}
 
-		$form->setValues($this->getValues());
-		$template->add('section', $section);
+			$sections[$name] = $section;
+		 }
+
+		 return $sections;
 	}
 
 

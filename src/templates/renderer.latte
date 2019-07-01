@@ -1,4 +1,4 @@
-<section n:snippet="section" n:if="isset($section)">
+<section n:snippet="section" n:if="!empty($sections)">
 
 	<form n:name="form" n:class="!$architect->isColor('clear') ? panel, $layoutClass, $colorClass">
 
@@ -12,9 +12,11 @@
 				{('form-architect.flash.'.$flash->message)|translate|noescape}
 			</div>
 
+		{foreach $sections as $section}
 			{formContainer $section->getName()}
 			{foreach $section->getInputs() as $field}
 
+				{continueIf $readOnly && $field->getClass() == 'captcha'}
 				{include #'input-'.$field->getClass()
 					form => $formContainer,
 					iterator => $iterator,
@@ -23,6 +25,7 @@
 
 			{/foreach}
 			{/formContainer}
+		{/foreach}
 
 			<div class="form-group no-margin-bottom" n:if="!$readOnly">
 				<label n:class="control-label, $architect->isLayout('horizontal') ? col-sm-3"></label>
