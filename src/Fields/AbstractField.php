@@ -13,7 +13,7 @@ use JuniWalk\FormArchitect\Helpers\Move;
 abstract class AbstractField extends Control implements Field
 {
 	/** @var bool */
-	private $hasLabel = true;
+	protected $hasLabel = true;
 
 	/** @var string[] */
 	protected $values = [];

@@ -12,12 +12,24 @@ use Nette\Forms\IControl as Input;
 
 final class Description extends AbstractField implements InputProvider
 {
+	/** @var bool */
+	protected $hasLabel = false;
+
 	/**
 	 * @return bool
 	 */
 	public function isSortable(): bool
 	{
 		return true;
+	}
+
+
+	/**
+	 * @param  bool  $label
+	 * @return void
+	 */
+	public function setLabel(bool $label): void
+	{
 	}
 
 
