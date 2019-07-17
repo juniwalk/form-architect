@@ -282,7 +282,7 @@ abstract class AbstractArchitect extends Control implements Architect
 		$header = Html::el();
 
 		if ($icon = $this->getIcon()) {
-			$icon = Html::el('i class="fa-fw"')->addClass($icon);
+			$icon = Html::el('i')->addClass($icon); // class="fa-fw"
 			$header->addHtml($icon)->addText(' ');
 		}
 
