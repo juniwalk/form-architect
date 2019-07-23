@@ -41,16 +41,6 @@ final class Designer extends AbstractArchitect
 
 
 	/**
-	 * @return void
-	 */
-	public function handleClearCache(): void
-	{
-		$this->clearCache();
-		$this->redirect('this');
-	}
-
-
-	/**
 	 * @return iterable
 	 */
 	public function getScheme(): iterable
@@ -156,7 +146,7 @@ final class Designer extends AbstractArchitect
 	/**
 	 * @return void
 	 */
-	private function clearCache(): void
+	protected function clearCache(): void
 	{
 		$this->getCache()->setScheme([]);
 	}

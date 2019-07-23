@@ -123,6 +123,16 @@ abstract class AbstractArchitect extends Control implements Architect
 
 
 	/**
+	 * @return void
+	 */
+	public function handleClearCache(): void
+	{
+		$this->clearCache();
+		$this->redirect('this');
+	}
+
+
+	/**
 	 * @param  bool  $autosave
 	 * @return void
 	 */
@@ -602,4 +612,10 @@ abstract class AbstractArchitect extends Control implements Architect
 
 		return $form;
 	}
+
+
+	/**
+	 * @return void
+	 */
+	abstract protected function clearCache(): void;
 }

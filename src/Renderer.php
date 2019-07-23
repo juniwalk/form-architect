@@ -438,7 +438,7 @@ final class Renderer extends AbstractArchitect
 	/**
 	 * @return void
 	 */
-	private function clearCache(): void
+	protected function clearCache(): void
 	{
 		$this->setValues([]);
 		$this->setStep(0);
