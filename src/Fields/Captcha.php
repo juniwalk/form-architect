@@ -37,8 +37,8 @@ final class Captcha extends AbstractField implements InputProvider
 	 */
 	public function createInput(Form $form): ?Input
 	{
-        $input = $form->addReCaptcha($this->getName())
-            ->setRequired(true);
+		$input = $form->addReCaptcha($this->getName())
+			->setRequired('form-architect.field.captcha-required');
 
 		return $input;
 	}
@@ -50,7 +50,7 @@ final class Captcha extends AbstractField implements InputProvider
 	protected function createSchemeField(): void
 	{
 		$form = $this->getForm();
-        $form->addReCaptcha('captcha')
-            ->setRequired(false);
+		$form->addReCaptcha('captcha')
+			->setRequired(false);
 	}
 }

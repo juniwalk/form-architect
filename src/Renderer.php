@@ -304,6 +304,15 @@ final class Renderer extends AbstractArchitect
 		$form->addSubmit('_back')->setValidationScope(false);
 		$form->addSubmit('_forward');
 		$form->addSubmit('_submit');
+
+		$form->onValidate[] = function(UI\Form $form) {
+			$values = $form->getHttpData();
+
+			if (isset($values['g-recaptcha-response']) && empty($values['g-recaptcha-response'])) {
+				$form->addError('form-architect.field.captcha-required');
+			}
+		};
+
 		$form->onSuccess[] = function(UI\Form $form) {
 			$step = $this->onFormSuccess($form);
 			$this->setStep($step);

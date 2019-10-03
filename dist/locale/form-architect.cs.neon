@@ -64,6 +64,7 @@ field:
 	title: 'Otázka a typ odpovědi'
 	description: 'Popis'
 	captcha: 'Captcha'
+	captcha-required: 'nette.user.captcha-required'
 
 	types:
 		text: '<i class="fas fa-font fa-fw"></i> Text'
