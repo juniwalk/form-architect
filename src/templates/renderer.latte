@@ -133,6 +133,24 @@
 
 {/define}
 
+{define input-confirm}
+
+	<div class="form-group">
+		<div class="col-sm-9 col-sm-offset-3" n:tag-if="$architect->isLayout('horizontal')">
+			<div class="checkbox-inline">
+				<label n:name="$field->getName()" n:class="$field->isRequired() ? required">
+					<input n:name="$field->getName()" type="checkbox">
+					<a n:tag-if="$link = $field->getValue('link')" href="{$link}" target="_blank">
+						{$field->getValue('title')}
+					</a>
+				</label>
+			</div>
+			<p class="help-block" n:ifcontent>{$field->getValue('description')}</p>
+		</div>
+	</div>
+
+{/define}
+
 {define input-captcha}
 
 	<div class="form-group">

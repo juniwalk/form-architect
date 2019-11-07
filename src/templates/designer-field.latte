@@ -89,6 +89,50 @@
 
 {/define}
 
+{define field-confirm}
+
+	<div class="form-group">
+		<label n:name="title">{_form-architect.field.title|noescape}</label>
+		<div class="input-group">
+
+			<!-- Field type -->
+			<div class="input-group-btn">
+				<a class="btn btn-default disabled">{_form-architect.field.types.checkbox|noescape}</a>
+			</div>
+
+			<input n:name="title" type="text" class="form-control" data-autosave>
+
+			<!-- Field options -->
+			<div class="input-group-btn" n:if="$control->hasToolbar()">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{_form-architect.designer.settings|noescape}</button>
+				<ul class="dropdown-menu dropdown-menu-right">
+					<li n:class="!$control->hasUpwardMove() ? disabled"><a n:attr="href => $control->hasUpwardMove() ? $control->link('moveUp!')" class="ajax">{_form-architect.settings.move-up|noescape}</a></li>
+					<li n:class="!$control->hasDownwardMove() ? disabled"><a n:attr="href => $control->hasDownwardMove() ? $control->link('moveDown!')" class="ajax">{_form-architect.settings.move-down|noescape}</a></li>
+					<li role="separator" class="divider"></li>
+					<li n:class="$control->isRequired() ? active"><a n:href="required!" class="ajax">{_form-architect.settings.required|noescape}</a></li>
+					<li><a n:href="clone!" class="ajax">{_form-architect.settings.clone|noescape}</a></li>
+					<li><a n:href="remove!" class="ajax">{_form-architect.settings.delete|noescape}</a></li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label n:name="link">{_form-architect.field.link}</label>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="fas fa-link"></i></span>
+			<input n:name="link" type="text" class="form-control input-sm" data-autosave>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label n:name="description">{_form-architect.field.description}</label>
+		<input n:name="description" type="text" class="form-control input-sm" data-autosave>
+	</div>
+
+{/define}
+
 {define field-captcha}
 
 	<div class="row">

@@ -94,6 +94,16 @@ abstract class AbstractSection extends Control implements Section
 	/**
 	 * @return void
 	 */
+	public function handleAddConfirm(): void
+	{
+		$this->addConfirm(null);
+		$this->getArchitect()->onSchemeChange();
+	}
+
+
+	/**
+	 * @return void
+	 */
 	public function handleAddCaptcha(): void
 	{
 		$this->getComponent('captcha', false) || $this->addCaptcha();
@@ -200,6 +210,17 @@ abstract class AbstractSection extends Control implements Section
 	public function addQuestion(?string $name): Fields\Question
 	{
 		return $this->addField($name, Fields\Question::class);
+	}
+
+
+	/**
+	 * @param  string|null  $name
+	 * @return Fields\Confirm
+	 * @throws Exception
+	 */
+	public function addConfirm(?string $name): Fields\Confirm
+	{
+		return $this->addField($name, Fields\Confirm::class);
 	}
 
 

@@ -52,6 +52,7 @@ settings:
 
 section:
 	question: '<i class="fas fa-fw fa-question"></i> <span class="hidden-xs">Přidat otázku</span>'
+	confirm: '<i class="fas fa-fw fa-check"></i> <span class="hidden-xs">Přidat souhlas</span>'
 	captcha: '<i class="fas fa-fw fa-shield-alt"></i> <span class="hidden-xs">Přidat captchu</span>'
 	description: '<i class="fas fa-fw fa-font"></i> <span class="hidden-xs">Přidat popis</span>'
 
@@ -63,8 +64,9 @@ field:
 	name: 'Jméno prvku'
 	title: 'Otázka a typ odpovědi'
 	description: 'Popis'
+	link: 'Odkaz'
 	captcha: 'Captcha'
-	captcha-required: 'nette.user.captcha-required'
+	captcha-required: 'Prosím vyplňte captchu.'
 
 	types:
 		text: '<i class="fas fa-font fa-fw"></i> Text'
