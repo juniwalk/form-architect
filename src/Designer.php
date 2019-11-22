@@ -92,7 +92,7 @@ final class Designer extends AbstractArchitect
 		foreach ($scheme['sections'] ?? [] as $sectionName => $section) {
 			$control = $this->getComponent($sectionName);
 
-			foreach ($section['fields'] as $fieldName => $field) {
+			foreach ($section['fields'] ?? [] as $fieldName => $field) {
 				$fieldType = $field['type'] ?? null;
 
 				if (!$fieldType || $fieldType !== $type) {
