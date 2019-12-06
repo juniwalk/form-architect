@@ -93,6 +93,10 @@
 		<input type="password" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
 	{/define*}
 
+	{define question-datetime}
+		<input type="text" class="form-control datetime" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
+	{/define}
+
 	{define question-email}
 		<input type="email" class="form-control" n:name="$field->getName()" n:attr="placeholder => !$field->hasLabel() ? $field->getValue('title')">
 	{/define}

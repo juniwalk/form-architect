@@ -23,6 +23,7 @@ final class Question extends AbstractField implements InputProvider
 		'text',
 		'email',
 		'url',
+		'datetime',
 		//'password',
 		'textarea',
 		null, // Separator
@@ -271,6 +272,10 @@ final class Question extends AbstractField implements InputProvider
 			case 'email':
 				$input = $form->addText($name);
 					//->addRule(\Nette\Forms\Form::EMAIL, 'nette.user.email-invalid');
+				break;
+
+			case 'datetime':
+				$input = $form->addDateTime($name)->setFormat('Y-m-d H:i');
 				break;
 
 			case 'textarea':
