@@ -32,6 +32,7 @@
 	  "nette-forms": "^2.0",
 	  "nette.ajax.js": "^2.0",
 	  "bootstrap": "^3.0",
+	  "bootstrap-filestyle": "^1.0",
 	  "bootstrap-datetime-picker": "^2.0"
 	}
   }

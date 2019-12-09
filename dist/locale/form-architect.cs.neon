@@ -71,10 +71,11 @@ field:
 	types:
 		text: '<i class="fas fa-font fa-fw"></i> Text'
 		email: '<i class="fas fa-envelope-open fa-fw"></i> Email'
-		url: '<i class="fas fa-globe fa-fw"></i> Odkaz'
 		password: '<i class="fas fa-key fa-fw"></i> Heslo'
-		datetime: '<i class="fas fa-calendar fa-fw"></i> Datum a čas'
 		textarea: '<i class="fas fa-paragraph fa-fw"></i> TextArea'
+		file: '<i class="fas fa-file fa-fw"></i> Soubor'
+		url: '<i class="fas fa-globe fa-fw"></i> Odkaz'
+		datetime: '<i class="fas fa-calendar fa-fw"></i> Datum a čas'
 		radio: '<i class="fas fa-dot-circle fa-fw"></i> Radio'
 		checkbox: '<i class="fas fa-check-square fa-fw"></i> Checkbox'
 		select: '<i class="fas fa-chevron-circle-down fa-fw"></i> Select'

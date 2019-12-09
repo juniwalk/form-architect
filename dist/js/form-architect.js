@@ -12,6 +12,12 @@ function form_architect_init()
 		$(this).change();
 	});
 
+	$(":file").filestyle({
+		buttonBefore: true,
+		buttonName: "bg-purple",
+		iconName: "fas fa-folder-open fa-fw"
+	});
+
 	$('input.datetime').datetimepicker({
 		format: 'yyyy-mm-dd hh:ii',
 		weekStart: 1,

@@ -8,6 +8,7 @@
 namespace JuniWalk\FormArchitect\Fields;
 
 use Nette\Forms\Container as Form;
+use Nette\Forms\Form as Rule;
 use Nette\Forms\IControl as Input;
 
 final class Question extends AbstractField implements InputProvider
@@ -22,10 +23,11 @@ final class Question extends AbstractField implements InputProvider
 	private $types = [
 		'text',
 		'email',
+		'textarea',
+		null, // Separator
+		'file',
 		'url',
 		'datetime',
-		//'password',
-		'textarea',
 		null, // Separator
 		'radio',
 		'checkbox',
@@ -264,14 +266,15 @@ final class Question extends AbstractField implements InputProvider
 				$input = $form->addText($name);
 				break;
 
-			//case 'password':
-			//	$input = $form->addText($name)
-			//		->addRule(\Nette\Forms\Form::MIN_LENGTH, 'nette.user.password-length', 6);
-			//	break;
+			case 'file':
+				$input = $form->addUpload($name)
+					->addRule(Rule::MAX_FILE_SIZE, 'Maximum file size is 10 MB.', 10485760);
+					//->addRule(Rule::MIME_TYPE, 'Thumbnail must be JPEG, PNG or GIF', ['video/*', 'image/*'])
+					//->addRule(Rule::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
+				break;
 
 			case 'email':
 				$input = $form->addText($name);
-					//->addRule(\Nette\Forms\Form::EMAIL, 'nette.user.email-invalid');
 				break;
 
 			case 'datetime':
@@ -304,6 +307,8 @@ final class Question extends AbstractField implements InputProvider
 
 			default: throw new \Exception($this->type);
 		}
+
+		$input->setRequired(false);
 
 		if ($this->getValue('isRequired')) {
 			$input->setRequired($this->getValue('title').' is required.');
