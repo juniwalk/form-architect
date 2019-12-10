@@ -15,17 +15,22 @@ class ArchitectFactory
 	/** @var Cache */
 	private $cache;
 
+	/** @var string */
+	private $uploadDir;
+
 	/** @var ITranslator */
 	private $translator;
 
 
 	/**
+	 * @param string|null  $uploadDir
 	 * @param Cache  $cache
 	 * @param ITranslator|null  $translator
 	 */
-	public function __construct(Cache $cache, ITranslator $translator = null)
+	public function __construct(?string $uploadDir, Cache $cache, ITranslator $translator = null)
 	{
 		$this->translator = $translator ?: new Helpers\SimpleTranslator;
+		$this->uploadDir = $uploadDir;
 		$this->cache = $cache;
 	}
 
@@ -51,6 +56,7 @@ class ArchitectFactory
 	{
 		$renderer = new Renderer($form, clone $this->cache);
 		$renderer->setTranslator($this->translator);
+		$renderer->setUploadDir($this->uploadDir);
 
 		return $renderer;
 	}

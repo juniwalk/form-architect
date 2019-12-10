@@ -9,11 +9,17 @@ namespace JuniWalk\FormArchitect;
 
 use JuniWalk\FormArchitect\Fields\Captcha;
 use Nette\Application\UI;
+use Nette\InvalidStateException;
+use Nette\Http\FileUpload;
+use Nette\Utils\Random;
 
 final class Renderer extends AbstractArchitect
 {
 	/** @var bool */
 	private $isReadOnly = false;
+
+	/** @var string */
+	private $uploadDir;
 
 	/** @var string[] */
 	private $steps = [];
@@ -52,6 +58,25 @@ final class Renderer extends AbstractArchitect
 	{
 		$this->setStep($this->getStep() - 1);
 		$this->redrawControl('section');
+	}
+
+
+	/**
+	 * @param  string|null  $uploadDir
+	 * @return void
+	 */
+	public function setUploadDir(?string $uploadDir): void
+	{
+		$this->uploadDir = $uploadDir;
+	}
+
+
+	/**
+	 * @return string|null
+	 */
+	public function getUploadDir(): ?string
+	{
+		return $this->uploadDir;
 	}
 
 
@@ -222,8 +247,23 @@ final class Renderer extends AbstractArchitect
 	 */
 	public function findValueByType(string $type, iterable $values): ?string
 	{
+		if (!$result = $this->findValuesByType($type, $values)) {
+			return null;
+		}
+
+		return current($result) ?? null;
+	}
+
+
+	/**
+	 * @param  string  $type
+	 * @param  string[]  $values
+	 * @return string[]
+	 */
+	public function findValuesByType(string $type, iterable $values): iterable
+	{
 		$scheme = $this->getScheme();
-		$path = [];
+		$items = [];
 
 		foreach ($scheme['sections'] as $sectionName => $section) {
 			foreach ($section['fields'] as $fieldName => $field) {
@@ -233,11 +273,11 @@ final class Renderer extends AbstractArchitect
 					continue;
 				}
 
-				return $values[$sectionName][$fieldName];
+				$items[$fieldName] = $values[$sectionName][$fieldName] ?? null;
 			}
 		}
 
-		return null;
+		return array_filter($items);
 	}
 
 
@@ -323,6 +363,45 @@ final class Renderer extends AbstractArchitect
 
 
 	/**
+	 * @param  mixed[]  $values
+	 * @return mixed[]
+	 * @throws InvalidStateException
+	 * @throws Exception
+	 */
+	private function processUploads(iterable $sections): iterable
+	{
+		foreach ($sections as $key1 => $items) {
+		foreach ($items as $key2 => $item) {
+			if (!$item instanceof FileUpload || !$item->hasFile()) {
+				continue;
+			}
+
+			if (!$item->isOk()) {
+				throw new InvalidStateException('Error uploading file to server.');
+			}
+
+			$ext = pathinfo($item->getSanitizedName(), PATHINFO_EXTENSION);
+			$path = $this->uploadDir.'/'.Random::generate(32).'.'.$ext;
+
+			if (preg_match('/php/i', $ext)) {
+				$path .= '.txt';
+			}
+
+			$item->move($path);
+
+			$sections[$key1][$key2] = [
+				'name' => $item->getSanitizedName(),
+				'file' => $key2,
+				'path' => $path,
+			];
+		}
+		}
+
+		return $sections;
+	}
+
+
+	/**
 	 * @param  UI\Form  $form
 	 * @return int
 	 */
@@ -341,7 +420,9 @@ final class Renderer extends AbstractArchitect
 			return $this->getStep() - 1;
 		}
 
+		$values = $this->processUploads($values);
 		$values = $values + $this->getValues();
+
 		$this->setValues($values);
 
 		if ($form['_forward']->isSubmittedBy()) {

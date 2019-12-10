@@ -268,9 +268,7 @@ final class Question extends AbstractField implements InputProvider
 
 			case 'file':
 				$input = $form->addUpload($name)
-					->addRule(Rule::MAX_FILE_SIZE, 'Maximum file size is 10 MB.', 10485760);
-					//->addRule(Rule::MIME_TYPE, 'Thumbnail must be JPEG, PNG or GIF', ['video/*', 'image/*'])
-					//->addRule(Rule::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
+					->addRule(Rule::MAX_FILE_SIZE, 'Maximum file size is 2 MB', 2097152);
 				break;
 
 			case 'email':

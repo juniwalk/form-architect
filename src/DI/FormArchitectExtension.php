@@ -16,6 +16,7 @@ final class FormArchitectExtension extends CompilerExtension
 	/** @var string[] */
 	private $default = [
 		'cache' => 'default',
+		'uploadDir' => null,
 	];
 
 	/** @var string[] */
@@ -37,6 +38,6 @@ final class FormArchitectExtension extends CompilerExtension
 
 		$this->getContainerBuilder()
 			->addDefinition($this->prefix('factory'))
-			->setClass(ArchitectFactory::class);
+			->setFactory(ArchitectFactory::class, [$config['uploadDir']]);
 	}
 }
