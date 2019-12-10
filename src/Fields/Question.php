@@ -268,7 +268,7 @@ final class Question extends AbstractField implements InputProvider
 
 			case 'file':
 				$input = $form->addUpload($name)
-					->addRule(Rule::MAX_FILE_SIZE, 'Maximum file size is 2 MB', 2097152);
+					->addRule(Rule::MAX_FILE_SIZE, 'form-architect.flash.max-file-size', 2097152);
 				break;
 
 			case 'email':

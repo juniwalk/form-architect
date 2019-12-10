@@ -6,6 +6,7 @@
 
 flash:
 	submit-success: '<i class="fas fa-check fa-fw"></i> Data byla úspěšně odeslána.'
+	max-file-size: 'Maximální velikost nahrávaného souboru je 2MB.'
 
 renderer:
 	back: '<i class="fas fa-fw fa-chevron-circle-left"></i> Zpět'
