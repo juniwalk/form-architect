@@ -12,7 +12,7 @@ function form_architect_init()
 		$(this).change();
 	});
 
-	$(":file").filestyle({
+	$(":file.upload").filestyle({
 		buttonBefore: true,
 		buttonName: "bg-purple",
 		iconName: "fas fa-folder-open fa-fw"
