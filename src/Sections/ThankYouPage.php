@@ -45,7 +45,7 @@ final class ThankYouPage extends AbstractSection
      */
     public function getDescription(): ?string
     {
-        return trim($this->description, '<p></p>');
+        return trim($this->description ?? '', '<p></p>');
     }
 
 
