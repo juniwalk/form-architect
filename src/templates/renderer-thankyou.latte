@@ -15,11 +15,11 @@
             <p n:ifcontent>{$section->getDescription()|noescape}</p>
 
             <div class="btn-toolbar">
-                <a href="{$redirect}" class="btn btn-primary" id="redirect" n:if="$redirect = $section->getRedirect()">{_form-architect.renderer.redirect|noescape}</a>
+                <a href="{$redirect}" class="btn btn-primary" id="redirect" target="_parent" n:if="$redirect = $section->getRedirect()">{_form-architect.renderer.redirect|noescape}</a>
                 <a n:href="firstStep!" class="btn btn-default ajax">{_form-architect.renderer.next|noescape}</a>
             </div>
 
-			<script type="text/javascript" n:if="$section->getRedirect() && !$section->getDescription()">
+			<script type="text/javascript" n:if="!$section->getDescription()">
 				document.getElementById('redirect').click();
 			</script>
 
