@@ -272,7 +272,8 @@ final class Question extends AbstractField implements InputProvider
 				break;
 
 			case 'email':
-				$input = $form->addText($name);
+				$input = $form->addText($name)
+					->addRule(Rule::EMAIL, 'form-architect.flash.email-invalid');
 				break;
 
 			case 'datetime':
