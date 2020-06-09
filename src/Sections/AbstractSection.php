@@ -127,7 +127,7 @@ abstract class AbstractSection extends Control implements Section
 	public function handleClone(): void
 	{
 		$architect = $this->getArchitect();
-		$section = $architect->addSection();
+		$section = $architect->addSection(null, null);
 
 		foreach ($this->getFields() as $field) {
 			$section->addField(null, get_class($field))
