@@ -371,30 +371,34 @@ final class Renderer extends AbstractArchitect
 	private function processUploads(iterable $sections): iterable
 	{
 		foreach ($sections as $key1 => $items) {
-		foreach ($items as $key2 => $item) {
-			if (!$item instanceof FileUpload || !$item->hasFile()) {
+			if (!is_iterable($items)) {
 				continue;
 			}
 
-			if (!$item->isOk()) {
-				throw new InvalidStateException('Error uploading file to server.');
+			foreach ($items as $key2 => $item) {
+				if (!$item instanceof FileUpload || !$item->hasFile()) {
+					continue;
+				}
+
+				if (!$item->isOk()) {
+					throw new InvalidStateException('Error uploading file to server.');
+				}
+
+				$ext = pathinfo($item->getSanitizedName(), PATHINFO_EXTENSION);
+				$path = $this->uploadDir.'/'.Random::generate(32).'.'.$ext;
+
+				if (preg_match('/php/i', $ext)) {
+					$path .= '.txt';
+				}
+
+				$item->move($path);
+
+				$sections[$key1][$key2] = [
+					'name' => $item->getSanitizedName(),
+					'file' => $key2,
+					'path' => $path,
+				];
 			}
-
-			$ext = pathinfo($item->getSanitizedName(), PATHINFO_EXTENSION);
-			$path = $this->uploadDir.'/'.Random::generate(32).'.'.$ext;
-
-			if (preg_match('/php/i', $ext)) {
-				$path .= '.txt';
-			}
-
-			$item->move($path);
-
-			$sections[$key1][$key2] = [
-				'name' => $item->getSanitizedName(),
-				'file' => $key2,
-				'path' => $path,
-			];
-		}
 		}
 
 		return $sections;
