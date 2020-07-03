@@ -1,0 +1,90 @@
+
+#
+# @copyright Design Point, s.r.o. (c) 2018
+# @license   MIT License
+#
+
+flash:
+	submit-success: '<i class="fas fa-check fa-fw"></i> Data sent successfully.'
+	max-file-size: 'The maximum size of the uploaded file is 2MB.'
+	email-invalid: 'The email provided is invalid.'
+
+renderer:
+	back: '<i class="fas fa-fw fa-chevron-circle-left"></i> Back'
+	next: '<i class="fas fa-fw fa-chevron-circle-right"></i> Next'
+	submit: '<i class="fas fa-fw fa-paper-plane"></i> Submit'
+	redirect: '<i class="fas fa-fw fa-directions"></i> Continue'
+
+designer:
+	save: '<i class="fas fa-fw fa-save"></i> <span class="hidden-xs">Save</span>'
+	settings: '<i class="fas fa-fw fa-cog"></i> <span class="sr-only">Settings</span>'
+	section: '<i class="fas fa-fw fa-file-medical"></i> <span class="hidden-xs">Form section</span>'
+	thankyou: '<i class="fas fa-fw fa-file-medical-alt"></i> <span class="hidden-xs">Thank you page</span>'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> <span class="sr-only">Remove</span>'
+	icon: 'Icon'
+	title: 'Form title'
+	footer: 'Form footer'
+
+settings:
+	move-up: '<i class="fas fa-chevron-up"></i> Move up'
+	move-down: '<i class="fas fa-chevron-down"></i> Move down'
+
+	required: '<i class="fas fa-fw fa-check-square"></i> Require completion'
+	label: '<i class="fas fa-fw fa-tag"></i> Show name'
+
+	colors:
+		clear: '<i class="fas fa-fw fa-square"></i> Clean'
+		default: '<i class="fas fa-fw fa-square text-muted"></i> Grey'
+		info: '<i class="fas fa-fw fa-square text-info"></i> Light blue'
+		primary: '<i class="fas fa-fw fa-square text-primary"></i> Dark blue'
+		success: '<i class="fas fa-fw fa-square text-success"></i> Green'
+		warning: '<i class="fas fa-fw fa-square text-warning"></i> Yellow'
+		danger: '<i class="fas fa-fw fa-square text-danger"></i> Red'
+
+	layouts:
+		vertical: '<i class="fas fa-fw fa-poll"></i> Standard'
+		horizontal: '<i class="fas fa-fw fa-poll-h"></i> Compact'
+		inline: '<i class="fas fa-fw fa-minus-square"></i> Inline'
+
+	clone: '<i class="fas fa-fw fa-copy"></i> Copy'
+	merge: '<i class="fas fa-fw fa-compress"></i> Unite'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> Remove'
+	undo: '<i class="fas fa-fw fa-undo-alt"></i> Undo changes'
+	clear: '<i class="fas fa-fw fa-trash-alt"></i> Remove all'
+
+section:
+	question: '<i class="fas fa-fw fa-question"></i> <span class="hidden-xs">Add a question</span>'
+	confirm: '<i class="fas fa-fw fa-check"></i> <span class="hidden-xs">Add consent</span>'
+	captcha: '<i class="fas fa-fw fa-shield-alt"></i> <span class="hidden-xs">Add a captcha</span>'
+	description: '<i class="fas fa-fw fa-font"></i> <span class="hidden-xs">Add a description</span>'
+
+thankyou:
+	redirect: 'Redirect link'
+	description: 'Content to display'
+
+field:
+	name: 'Element name'
+	title: 'Question and type of answer'
+	description: 'Description'
+	link: 'Link'
+	captcha: 'Captcha'
+	captcha-required: 'Please fill in the captcha'
+
+	types:
+		text: '<i class="fas fa-font fa-fw"></i> Text'
+		email: '<i class="fas fa-envelope-open fa-fw"></i> Email'
+		password: '<i class="fas fa-key fa-fw"></i> Password'
+		textarea: '<i class="fas fa-paragraph fa-fw"></i> TextArea'
+		file: '<i class="fas fa-file fa-fw"></i> File'
+		url: '<i class="fas fa-globe fa-fw"></i> Link'
+		datetime: '<i class="fas fa-calendar fa-fw"></i> Date and time'
+		radio: '<i class="fas fa-dot-circle fa-fw"></i> Radio'
+		checkbox: '<i class="fas fa-check-square fa-fw"></i> Checkbox'
+		select: '<i class="fas fa-chevron-circle-down fa-fw"></i> Select'
+
+option:
+	title: 'Answer'
+	add: '<i class="fas fa-fw fa-plus"></i> Add an answer'
+	delete: '<i class="fas fa-fw fa-times"></i> <span class="sr-only">Remove reply</span>'
+	multiple: 'Allow more answers.'
+	inline: 'Display answers in a row.'
