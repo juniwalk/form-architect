@@ -1,0 +1,90 @@
+
+#
+# @copyright Design Point, s.r.o. (c) 2018
+# @license   MIT License
+#
+
+flash:
+	submit-success: '<i class="fas fa-check fa-fw"></i> 데이터를 성공적으로 보냈습니다.'
+	max-file-size: '업로드 된 파일의 최대 크기는 2MB입니다.'
+	email-invalid: '제공된 이메일이 유효하지 않습니다.'
+
+renderer:
+	back: '<i class="fas fa-fw fa-chevron-circle-left"></i> 뒤'
+	next: '<i class="fas fa-fw fa-chevron-circle-right"></i> 다음'
+	submit: '<i class="fas fa-fw fa-paper-plane"></i> 보낸다'
+	redirect: '<i class="fas fa-fw fa-directions"></i> 계속하다'
+
+designer:
+	save: '<i class="fas fa-fw fa-save"></i> <span class="hidden-xs">저장</span>'
+	settings: '<i class="fas fa-fw fa-cog"></i> <span class="sr-only">설정</span>'
+	section: '<i class="fas fa-fw fa-file-medical"></i> <span class="hidden-xs">양식 섹션</span>'
+	thankyou: '<i class="fas fa-fw fa-file-medical-alt"></i> <span class="hidden-xs">감사 페이지</span>'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> <span class="sr-only">없애다</span>'
+	icon: 'Icon'
+	title: '양식 제목'
+	footer: '양식 바닥 글'
+
+settings:
+	move-up: '<i class="fas fa-chevron-up"></i> 이동'
+	move-down: '<i class="fas fa-chevron-down"></i> 아래로 이동'
+
+	required: '<i class="fas fa-fw fa-check-square"></i> 완료 필요'
+	label: '<i class="fas fa-fw fa-tag"></i> 쇼 이름'
+
+	colors:
+		clear: '<i class="fas fa-fw fa-square"></i> 깨끗한'
+		default: '<i class="fas fa-fw fa-square text-muted"></i> 회색'
+		info: '<i class="fas fa-fw fa-square text-info"></i> 하늘색'
+		primary: '<i class="fas fa-fw fa-square text-primary"></i> 진한 파란색'
+		success: '<i class="fas fa-fw fa-square text-success"></i> 초록'
+		warning: '<i class="fas fa-fw fa-square text-warning"></i> 노랑'
+		danger: '<i class="fas fa-fw fa-square text-danger"></i> 빨간'
+
+	layouts:
+		vertical: '<i class="fas fa-fw fa-poll"></i> 표준'
+		horizontal: '<i class="fas fa-fw fa-poll-h"></i> 콤팩트'
+		inline: '<i class="fas fa-fw fa-minus-square"></i> 인라인'
+
+	clone: '<i class="fas fa-fw fa-copy"></i> 부'
+	merge: '<i class="fas fa-fw fa-compress"></i> 함께 가지다'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> 없애다'
+	undo: '<i class="fas fa-fw fa-undo-alt"></i> 변경 취소'
+	clear: '<i class="fas fa-fw fa-trash-alt"></i> 모두 제거'
+
+section:
+	question: '<i class="fas fa-fw fa-question"></i> <span class="hidden-xs">질문 추가</span>'
+	confirm: '<i class="fas fa-fw fa-check"></i> <span class="hidden-xs">동의 추가</span>'
+	captcha: '<i class="fas fa-fw fa-shield-alt"></i> <span class="hidden-xs">보안 문자 추가</span>'
+	description: '<i class="fas fa-fw fa-font"></i> <span class="hidden-xs">설명 추가</span>'
+
+thankyou:
+	redirect: '링크 리디렉션'
+	description: '표시 할 내용'
+
+field:
+	name: '요소 이름'
+	title: '질문 및 답변 유형'
+	description: '기술'
+	link: '링크'
+	captcha: 'Captcha'
+	captcha-required: '보안 문자를 입력하세요'
+
+	types:
+		text: '<i class="fas fa-font fa-fw"></i> 본문'
+		email: '<i class="fas fa-envelope-open fa-fw"></i> 이메일'
+		password: '<i class="fas fa-key fa-fw"></i> 암호'
+		textarea: '<i class="fas fa-paragraph fa-fw"></i> TextArea'
+		file: '<i class="fas fa-file fa-fw"></i> 파일'
+		url: '<i class="fas fa-globe fa-fw"></i> 링크'
+		datetime: '<i class="fas fa-calendar fa-fw"></i> 날짜와 시간'
+		radio: '<i class="fas fa-dot-circle fa-fw"></i> 라디오'
+		checkbox: '<i class="fas fa-check-square fa-fw"></i> 체크 박스'
+		select: '<i class="fas fa-chevron-circle-down fa-fw"></i> 고르다'
+
+option:
+	title: '대답'
+	add: '<i class="fas fa-fw fa-plus"></i> 답변 추가'
+	delete: '<i class="fas fa-fw fa-times"></i> <span class="sr-only">답글 제거</span>'
+	multiple: '더 많은 답변을 허용하십시오.'
+	inline: '행에 답변을 표시합니다.'

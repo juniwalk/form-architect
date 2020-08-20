@@ -1,0 +1,90 @@
+
+#
+# @copyright Design Point, s.r.o. (c) 2018
+# @license   MIT License
+#
+
+flash:
+	submit-success: '<i class="fas fa-check fa-fw"></i> Daten erfolgreich gesendet.'
+	max-file-size: 'Die maximale Größe der hochgeladenen Datei beträgt 2 MB.'
+	email-invalid: 'Die angegebene E-Mail-Adresse ist ungültig.'
+
+renderer:
+	back: '<i class="fas fa-fw fa-chevron-circle-left"></i> Zurück'
+	next: '<i class="fas fa-fw fa-chevron-circle-right"></i> Nächster'
+	submit: '<i class="fas fa-fw fa-paper-plane"></i> Senden'
+	redirect: '<i class="fas fa-fw fa-directions"></i> Fortsetzen'
+
+designer:
+	save: '<i class="fas fa-fw fa-save"></i> <span class="hidden-xs">sparen</span>'
+	settings: '<i class="fas fa-fw fa-cog"></i> <span class="sr-only">die Einstellungen</span>'
+	section: '<i class="fas fa-fw fa-file-medical"></i> <span class="hidden-xs">Formularabschnitt</span>'
+	thankyou: '<i class="fas fa-fw fa-file-medical-alt"></i> <span class="hidden-xs">Danke Seite</span>'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> <span class="sr-only">Entfernen</span>'
+	icon: 'Icon'
+	title: 'Formulartitel'
+	footer: 'Form Fußzeile'
+
+settings:
+	move-up: '<i class="fas fa-chevron-up"></i> rücken'
+	move-down: '<i class="fas fa-chevron-down"></i> absteigen'
+
+	required: '<i class="fas fa-fw fa-check-square"></i> Fertigstellung erforderlich'
+	label: '<i class="fas fa-fw fa-tag"></i> Name anzeigen'
+
+	colors:
+		clear: '<i class="fas fa-fw fa-square"></i> Reinigen'
+		default: '<i class="fas fa-fw fa-square text-muted"></i> Grau'
+		info: '<i class="fas fa-fw fa-square text-info"></i> Hellblau'
+		primary: '<i class="fas fa-fw fa-square text-primary"></i> Dunkelblau'
+		success: '<i class="fas fa-fw fa-square text-success"></i> Grün'
+		warning: '<i class="fas fa-fw fa-square text-warning"></i> 	Gelb'
+		danger: '<i class="fas fa-fw fa-square text-danger"></i> Rot'
+
+	layouts:
+		vertical: '<i class="fas fa-fw fa-poll"></i> Standard'
+		horizontal: '<i class="fas fa-fw fa-poll-h"></i> Kompakt'
+		inline: '<i class="fas fa-fw fa-minus-square"></i> In der Reihe'
+
+	clone: '<i class="fas fa-fw fa-copy"></i> Kopieren'
+	merge: '<i class="fas fa-fw fa-compress"></i> Vereinen'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> Entfernen'
+	undo: '<i class="fas fa-fw fa-undo-alt"></i> Undo changes'
+	clear: '<i class="fas fa-fw fa-trash-alt"></i> Alles entfernen'
+
+section:
+	question: '<i class="fas fa-fw fa-question"></i> <span class="hidden-xs">Fügen Sie eine Frage hinzu</span>'
+	confirm: '<i class="fas fa-fw fa-check"></i> <span class="hidden-xs">Zustimmung hinzufügen</span>'
+	captcha: '<i class="fas fa-fw fa-shield-alt"></i> <span class="hidden-xs">Fügen Sie ein Captcha hinzu</span>'
+	description: '<i class="fas fa-fw fa-font"></i> <span class="hidden-xs">Fügen Sie eine Beschreibung hinzu</span>'
+
+thankyou:
+	redirect: 'Link umleiten'
+	description: 'Inhalt angezeigt werden'
+
+field:
+	name: 'Elementname'
+	title: 'Frage und Art der Antwort'
+	description: 'Beschreibung'
+	link: 'Link'
+	captcha: 'Captcha'
+	captcha-required: 'Bitte füllen Sie das Captcha aus'
+
+	types:
+		text: '<i class="fas fa-font fa-fw"></i> Text'
+		email: '<i class="fas fa-envelope-open fa-fw"></i> Email'
+		password: '<i class="fas fa-key fa-fw"></i> Passwort'
+		textarea: '<i class="fas fa-paragraph fa-fw"></i> TextArea'
+		file: '<i class="fas fa-file fa-fw"></i> File'
+		url: '<i class="fas fa-globe fa-fw"></i> Link'
+		datetime: '<i class="fas fa-calendar fa-fw"></i> Datum und Uhrzeit'
+		radio: '<i class="fas fa-dot-circle fa-fw"></i> Radio'
+		checkbox: '<i class="fas fa-check-square fa-fw"></i> Checkbox'
+		select: '<i class="fas fa-chevron-circle-down fa-fw"></i> Select'
+
+option:
+	title: 'Antworten'
+	add: '<i class="fas fa-fw fa-plus"></i> Fügen Sie eine Antwort hinzu'
+	delete: '<i class="fas fa-fw fa-times"></i> <span class="sr-only">Antwort entfernen</span>'
+	multiple: 'Erlaube mehr Antworten.'
+	inline: 'Antworten in einer Reihe anzeigen.'

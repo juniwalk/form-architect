@@ -1,0 +1,90 @@
+
+#
+# @copyright Design Point, s.r.o. (c) 2018
+# @license   MIT License
+#
+
+flash:
+	submit-success: '<i class="fas fa-check fa-fw"></i> 数据发送成功。'
+	max-file-size: '上载文件的最大大小为2MB。'
+	email-invalid: '提供的电子邮件无效。'
+
+renderer:
+	back: '<i class="fas fa-fw fa-chevron-circle-left"></i> 背部'
+	next: '<i class="fas fa-fw fa-chevron-circle-right"></i> 下一个'
+	submit: '<i class="fas fa-fw fa-paper-plane"></i> 提交'
+	redirect: '<i class="fas fa-fw fa-directions"></i> 继续'
+
+designer:
+	save: '<i class="fas fa-fw fa-save"></i> <span class="hidden-xs">保存</span>'
+	settings: '<i class="fas fa-fw fa-cog"></i> <span class="sr-only">设定值</span>'
+	section: '<i class="fas fa-fw fa-file-medical"></i> <span class="hidden-xs">表格部分</span>'
+	thankyou: '<i class="fas fa-fw fa-file-medical-alt"></i> <span class="hidden-xs">谢谢页面</span>'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> <span class="sr-only">去掉</span>'
+	icon: 'Icon'
+	title: '表格标题'
+	footer: '表单页脚'
+
+settings:
+	move-up: '<i class="fas fa-chevron-up"></i> 提升'
+	move-down: '<i class="fas fa-chevron-down"></i> 下移'
+
+	required: '<i class="fas fa-fw fa-check-square"></i> 需要完成'
+	label: '<i class="fas fa-fw fa-tag"></i> 显示名称'
+
+	colors:
+		clear: '<i class="fas fa-fw fa-square"></i> 清洁'
+		default: '<i class="fas fa-fw fa-square text-muted"></i> 灰色'
+		info: '<i class="fas fa-fw fa-square text-info"></i> 浅蓝'
+		primary: '<i class="fas fa-fw fa-square text-primary"></i> 深蓝'
+		success: '<i class="fas fa-fw fa-square text-success"></i> 绿色'
+		warning: '<i class="fas fa-fw fa-square text-warning"></i> 黄色'
+		danger: '<i class="fas fa-fw fa-square text-danger"></i> 红'
+
+	layouts:
+		vertical: '<i class="fas fa-fw fa-poll"></i> 标准'
+		horizontal: '<i class="fas fa-fw fa-poll-h"></i> 紧凑'
+		inline: '<i class="fas fa-fw fa-minus-square"></i> 排队'
+
+	clone: '<i class="fas fa-fw fa-copy"></i> 复制'
+	merge: '<i class="fas fa-fw fa-compress"></i> 团结'
+	delete: '<i class="far fa-fw fa-trash-alt"></i> 去掉'
+	undo: '<i class="fas fa-fw fa-undo-alt"></i> 取消更改'
+	clear: '<i class="fas fa-fw fa-trash-alt"></i> 移除所有'
+
+section:
+	question: '<i class="fas fa-fw fa-question"></i> <span class="hidden-xs">添加问题</span>'
+	confirm: '<i class="fas fa-fw fa-check"></i> <span class="hidden-xs">添加同意</span>'
+	captcha: '<i class="fas fa-fw fa-shield-alt"></i> <span class="hidden-xs">添加验证码</span>'
+	description: '<i class="fas fa-fw fa-font"></i> <span class="hidden-xs">增加一个说明</span>'
+
+thankyou:
+	redirect: '重定向链接'
+	description: '显示内容'
+
+field:
+	name: '元素名称'
+	title: '问题和答案类型'
+	description: '描述'
+	link: '链接'
+	captcha: '验证码'
+	captcha-required: '请填写验证码'
+
+	types:
+		text: '<i class="fas fa-font fa-fw"></i> 文本'
+		email: '<i class="fas fa-envelope-open fa-fw"></i> 电子邮件'
+		password: '<i class="fas fa-key fa-fw"></i> 密码'
+		textarea: '<i class="fas fa-paragraph fa-fw"></i> 文字区域'
+		file: '<i class="fas fa-file fa-fw"></i> 文件'
+		url: '<i class="fas fa-globe fa-fw"></i> 链接'
+		datetime: '<i class="fas fa-calendar fa-fw"></i> 日期和时间'
+		radio: '<i class="fas fa-dot-circle fa-fw"></i> 无线电'
+		checkbox: '<i class="fas fa-check-square fa-fw"></i> 选框'
+		select: '<i class="fas fa-chevron-circle-down fa-fw"></i> 选择'
+
+option:
+	title: '回答'
+	add: '<i class="fas fa-fw fa-plus"></i> 添加答案'
+	delete: '<i class="fas fa-fw fa-times"></i> <span class="sr-only">删除回复</span>'
+	multiple: '允许更多答案。'
+	inline: '连续显示答案。'
